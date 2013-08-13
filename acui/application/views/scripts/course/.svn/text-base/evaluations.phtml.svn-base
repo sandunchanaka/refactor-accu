@@ -1,0 +1,29 @@
+ <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Course Name</th>
+                                <th>Student Name</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <?php foreach ($this->evaluations as $evaluation) { ?>
+								<tr class="<?php echo $this->cycle(array('', 'info'))->next(); ?>">
+									<td><?php echo $evaluation->id;?></td>
+									<td><a class="evaluation" href="#" data-course-id='<?php echo $evaluation->course_id;?>' data-user-id='<?php echo $evaluation->user_id?>' data-evalid="<?php echo $evaluation->id;?>"><?php echo $evaluation->course_id;?></a></td>
+									<td><?php echo $evaluation->user_id;?></td>
+									<td><?php echo $evaluation->created_date;?></td>
+								</tr>
+							<?php } ?>
+                        </tbody>
+                    </table>
+                    
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$(".evaluation").click(function (e) {
+			$("#content").html('').load("/course/vieweval/courseid/" + $(this).attr('data-course-id') + "/userid/" + $(this).attr('data-user-id'));
+			return false;
+		})
+	});
+ </script>                    

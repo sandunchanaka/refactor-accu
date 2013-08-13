@@ -1,0 +1,72 @@
+<table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Thread</th>
+                                <th>Number of Posts</th>
+                                <th>Last Post Date</th>
+                                <?php if ($this->delete) { ?>
+                                	<th>Delete</th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<?php foreach ($this->threads as $thread) { ?>
+                            <tr class='<?php echo $this->cycle(array('', 'info'))->next();?>'>
+                                <td><a class="thread" data-id="<?php echo $thread->id; ?>" href="#"><?php echo $thread->title;?></a></td>
+                                <td><?php echo $thread->count;?></td>
+                                <td><?php echo $thread->created_date;?></td>
+                                 <?php if ($this->delete) { ?>
+                                	<td><button type='button' class='delete' data-id='<?php echo $thread->id;?>'><span>Delete</span></button></td>
+                                <?php } ?>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    
+                    <div>
+                    	<form method="post" action="/discussion/addthread">
+                    		Thread Name <input type="text" name="title" id="title" />
+                    		<input type="hidden" name="discussion_id" id="discussion_id" value="<?php echo $this->discussion_id; ?>" />
+                    		<button type="button" id="addthread"><span>Add Thread</span></button>
+                    	</form>
+                    </div>
+                    
+ <script type="text/javascript">
+	$(document).ready(function (e) {
+		$("button.delete").click(function (e) {
+			e.preventDefault();
+			var that = $(this);
+			var data = { "id" : $(this).attr('data-id') };
+			var options = {
+				url : "/discussion/delthread",
+				data : data,
+				type: "post",
+				dataType : "json",
+				success: function (json) {
+					that.parent().parent().remove();
+				}
+			};
+			$.ajax(options);
+		});
+		
+        $("a.thread").click(function (e) {
+			e.preventDefault();
+			$("#content").load("/discussion/threadview/id/" + $(this).attr('data-id'));
+        });
+		 
+		$("#addthread").click(function (e) {
+			e.preventDefault();
+			var data = { "title" : $('#title').val(), "discussion_id" : $("#discussion_id").val() };
+			var options = {
+				url: "/discussion/addthread",
+				type: "post",
+				dataType: "json",
+				data: data,
+				success: function (e) {
+					$('#content').load("/discussion/view/id/" + $("#discussion_id").val());					
+				}
+			};
+			$.ajax(options);
+		});
+	});
+ </script>

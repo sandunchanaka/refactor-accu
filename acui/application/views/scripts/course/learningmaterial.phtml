@@ -1,0 +1,30 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+<form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'save'), 'default', false); ?>'>
+			                    	
+	<div class="tabbable"> <!-- Only required for left/right tabs -->
+    	<ul class="nav nav-tabs">
+        	<li class="active"><a href="#tab1" data-toggle="tab">Handouts</a></li>                            				
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="tab1">
+				<?php foreach ($this->modules as $module) { ?>
+					<div class="control-group">
+				    	<label class="control-label" for="inputName"><?php echo $module['name']; ?></label>
+				        
+				        <?php foreach ($module['handouts'] as $handout) { ?>
+					        <div class="controls">
+					        	<?php echo nl2br($handout->name); ?>
+		                    </div>
+					        <div class="controls">
+					        	<?php echo nl2br($handout->overview); ?>
+		                    </div>	                    
+		                    <div class="controls">
+					        	<a href="/course/download/type/handout/id/<?php echo $handout->id;?>"><?php echo $handout->file_name; ?></a>
+		                    </div>
+		                 <?php } ?>
+	              	</div>
+              	<?php } ?>				                            				
+			</div>
+		</div>
+	</div>
+</form>

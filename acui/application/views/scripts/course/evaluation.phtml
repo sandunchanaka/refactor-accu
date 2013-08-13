@@ -1,0 +1,48 @@
+<?php echo $this->breadCrumb(); ?>
+                    
+			
+                                <form id='evalform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'saveeval'), 'default', false); ?>'>
+			                    	<?php foreach ($this->evaluation_items as $evaluation_item) { ?>			                    	
+				                    	<div class="control-group">
+				                    		<label class="control-label" for="inputName"><?php echo $evaluation_item->criteria; ?></label>
+				                    		<div class="controls">
+				                    			<?php if ($evaluation_item->type == 1) { ?>
+				                    				<select name='eval_<?php echo $evaluation_item->id; ?>'>
+				                    					<option value='1'>1</option>
+				                    					<option value='2'>2</option>
+				                    					<option value='3'>3</option>
+				                    					<option value='4'>4</option>
+				                    				</select>
+				                    			<?php } else { ?>
+				                    				<textarea id='eval_<?php echo $evaluation_item->id; ?>' name='eval_<?php echo $evaluation_item->id; ?>'></textarea>
+				                    			<?php } ?>
+				                    		</div>
+				                    	</div>
+			                        <?php } ?>
+			                        <div class="form-actions">
+			                        	<input type='hidden' name='course_id' value='<?php echo $this->course_id;?>' />
+			                        	<input type='hidden' name='user_id' value='<?php echo $this->user_id;?>' />			                        	
+                        				<button id='btnsubmit' type="submit" class="btn btn-primary">Next</button>
+                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+                        			</div>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#btnsubmit').click(function (e) {
+			$('#evalform').ajaxSubmit({ 
+					success: function (json) {
+						$('#content').html('').load('/course/evaldone');
+					}
+				});
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

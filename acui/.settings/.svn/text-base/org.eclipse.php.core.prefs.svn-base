@@ -1,0 +1,4 @@
+#Wed May 22 19:42:08 ICT 2013
+eclipse.preferences.version=1
+include_path=5;com.zend.php.phpunit.CONTAINER\u00055;org.zend.php.framework.CONTAINER\u00050;/toast
+use_asp_tags_as_php=false

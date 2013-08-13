@@ -1,0 +1,121 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'save'), 'default', false); ?>'>
+			                    	
+			                    	<div class="tabbable"> <!-- Only required for left/right tabs -->
+                        				<ul class="nav nav-tabs">
+                            				<li class="active"><a href="#tab1" data-toggle="tab">Module Overview</a></li>
+                            				<li><a href="#tab2" data-toggle="tab">Excercises</a></li>
+                            				<li><a href="#tab3" data-toggle="tab">Handouts</a></li>                            				
+                        				</ul>
+				                        <div class="tab-content">
+				                            <div class="tab-pane active" id="tab1">
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputName">Module Name</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->module->module_name; ?>
+			                    					</div>
+			                    				</div>				                            
+				                                <div class="control-group">
+			                    					<label class="control-label" for="inputName">Module Overview</label>
+			                    					<div class="controls">
+			                    						<?php echo nl2br($this->mextra->overview); ?>
+			                    					</div>
+			                    				</div>
+			                    				
+			                    				<div class="control-group">
+			                    					<label class="control-label" for="inputName">Overview (File)</label>
+			                    					<div class="controls">
+			                    						<a href='/course/download/type/mextra/id/<?php echo $this->module->id;?>'><?php echo $this->mextra->file_name; ?></a> 
+			                    					</div>
+			                    				</div>
+			                    				
+				                            </div>
+				                            <div class="tab-pane" id="tab2">
+				                            
+				                            		<div class="control-group">
+				                    					<label class="control-label" for="inputName">Module Name</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->module->module_name; ?>
+				                    					</div>
+			                    					</div>		
+				                            	
+			                    					<?php foreach ($this->module_exe as $excercise) { ?>
+			                    					<div class="control-group">			                    					
+				                    					<label class="control-label" for="inputDescription">Excercise Name</label>
+				                    					<div class="controls">
+				                    						<?php echo nl2br($excercise->name); ?>
+				                    					</div>
+			                    					</div>
+			                    					<div class="control-group">			                    					
+				                    					<label class="control-label" for="inputDescription">Excercise Overview</label>
+				                    					<div class="controls">
+				                    						<?php echo nl2br($excercise->overview); ?>
+				                    					</div>
+			                    					</div>
+			                    					<div class="control-group">			                    					
+				                    					<label class="control-label" for="inputDescription">Excercise File</label>
+				                    					<div class="controls">
+			                    							<a href='/course/download/type/excercise/id/<?php echo $excercise->id;?>'><?php echo $excercise->file_name?></a>
+			                    						</div>
+			                    					</div>
+			                    					<?php } ?>				                            	
+				                            </div>
+				                            
+				                            <div class="tab-pane" id="tab3">
+				                            
+				                            		<div class="control-group">
+				                    					<label class="control-label" for="inputName">Module Name</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->module->module_name; ?>
+				                    					</div>
+			                    					</div>		
+				                            	
+			                    					<?php foreach ($this->module_hand as $handout) { ?>
+			                    					<div class="control-group">			                    					
+			                    						<label class="control-label" for="inputDescription">Handout Name</label>
+				                    					<div class="controls">
+				                    						<?php echo nl2br($handout->name); ?>
+				                    					</div>
+				                    				</div>
+			                    					<div class="control-group">			                    					
+			                    						<label class="control-label" for="inputDescription">Handout Overview</label>
+				                    					<div class="controls">
+				                    						<?php echo nl2br($handout->overview); ?>
+				                    					</div>
+				                    				</div>
+			                    					<div class="control-group">			                    					
+			                    						<label class="control-label" for="inputDescription">Handout File</label>
+				                    					<div class="controls">
+			                    							<a href='/course/download/type/handout/id/<?php echo $handout->id;?>'><?php echo $handout->file_name?></a>
+			                    						</div>
+			                    					</div>
+			                    					<?php } ?>
+			                    				</div>	
+				                            </div>
+				                        </div>
+				                        <?php if ($this->edit) { ?>
+					                        <div class="form-actions">
+		                        				<button id='btnsubmit' data-module-id="<?php echo $this->module->id; ?>" type="button" class="btn btn-primary">Edit</button>
+		                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+		                        			</div>
+		                        		<?php } ?>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		
+		$('#btnsubmit').click(function (e) {
+			$("#content").html('').load("/course/moduleedit/id/" + $(this).attr('data-module-id'));			
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

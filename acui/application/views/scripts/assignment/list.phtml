@@ -1,0 +1,31 @@
+ <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Assignment Name</th>
+                                <th>Student Name</th>
+                                <th>Course Name</th>
+                                <th>Submission Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <?php foreach ($this->mess as $mes) { ?>
+								<tr class="<?php echo $this->cycle(array('', 'info'))->next(); ?>">
+									<td><?php echo $mes->id;?></td>
+									<td><a href="/assignment/download/id/<?php echo $mes->id; ?>"><?php echo $mes->name;?></a></td>
+									<td><?php echo $mes->student_name;?></td>
+									<td><?php echo $mes->course_name;?></td>
+									<td><?php echo $mes->created_date;?></td>
+								</tr>
+							<?php } ?>
+                        </tbody>
+                    </table>
+                    
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$(".course").click(function (e) {
+			$("#content").html('').load("/facilitator/view/id/" + $(this).attr('facilitator_id'));
+			return false;
+		})
+	});
+ </script>                    

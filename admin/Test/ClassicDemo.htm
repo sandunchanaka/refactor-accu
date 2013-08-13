@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>Classic Demo</TITLE>
+<Style type="text/css">
+.plain {height:20px; border:1px solid gray; font:9pt arial; text-align:center;  vertical-align:middle;}
+.vbtn {height:20px; width:18px; font:bold 10pt arial; border:2px solid silver;  vertical-align:middle;}
+.vsel {height:18px; width:60px; border:1px solid gray; font:9pt arial; text-align:center; vertical-align:middle;}
+</Style>
+</HEAD>
+<BODY>
+
+<link rel='stylesheet' type='text/css' href='demo.css'>
+<BR>
+
+<FORM name="form1" onSubmit="alert('form submitted');">
+<TABLE align=center width=600 border=0 >
+  <TR>
+    <TD align=center colspan=2 nowrap>
+      <H2>PopCalendarXP 9.0</H2><BR><BR>
+	</TD></TR>
+  <TR>
+    <TD align="right" class="toright" width="35%" nowrap>Arrival On: </TD>
+    <TD class="toleft" nowrap>
+	<select name="arrDate_day" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-day-');for(var i=1;i<=31;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="arrDate_mon" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-mon-');for(var i=1;i<=12;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="arrDate_year" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-year-');for(var i=1980;i<=2030;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> <INPUT name="popcal" onClick="if(this.blur)this.blur();var fm=this.form;if(self.gfPop)gfPop.fStartPop(fm.txt_start_date,fm.deptDate, this);" type="button" value="..." class="vbtn">
+	<input name="txt_start_date" type="text" value="">
+	</TD>
+  </TR>
+
+  <TR>
+    <TD align="right" class="toright" width="35%" nowrap>Depart On: </TD>
+    <TD class="toleft" nowrap>
+	<select name="deptDate_day" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-day-');for(var i=1;i<=31;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="deptDate_mon" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-mon-');for(var i=1;i<=12;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> /
+	<select name="deptDate_year" class="vsel" onChange="if(self.gfPop)gfPop.updateHidden(this)">
+	<script>document.write('<option value="-">-year-');for(var i=1980;i<=2030;i++) {document.write('<option value="'+i+'">'+i)}</script>
+	</select> <INPUT name="popcal" onClick="if(this.blur)this.blur();var fm=this.form;if(self.gfPop)gfPop.fEndPop(fm.txt_start_date,fm.deptDate, this);" type="button" value="..." class="vbtn">
+	<input name="deptDate" type="text" value="">
+	</TD>
+  </TR>
+</TABLE>
+</FORM>
+
+
+<!--  PopCalendar(tag name and id must match) Tags should not be enclosed in tags other than the html body tag. -->
+<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="Classic/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+</iframe>
+</BODY>
+</HTML>
+

@@ -1,0 +1,155 @@
+<div class="span3 accordion-outer">
+            
+            	<div class="accordion" id="leftMenu">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle active" data-toggle="collapse" data-parent="#leftMenu" href="#">
+                                  Admin Menu
+                            </a>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseTwo">
+                                Course Administration
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse in">
+                            <div class="accordion-inner">
+                                <ul>
+                                    <li><a id='addcourse' href="#">Add Course</a></li>
+                                    <li><a id='listcourses' href="#">List Course(s)</a></li>                                                                        
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseThree">
+                                Facilitator Manager
+                            </a>
+                        </div>
+                        <div id="collapseThree" class="accordion-body collapse in">
+                            <div class="accordion-inner" id='ModuleMenu'>
+                                <ul>
+                                    <li><a id='addfacilitator' href="javascript:void(0)">Add Facilitator</a></li>
+                                    <li><a id='listfacilitator' href="javascript:void(0)">List Facilitator(s)</a></li>                                    
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFour">
+                                Learner Manager
+                            </a>
+                        </div>
+                        <div id="collapseFour" class="accordion-body collapse in">
+                            <div class="accordion-inner">
+                                <ul>
+                                    <li><a id='addlearner' href="javascript:void(0)">Add Learner</a></li>
+                                    <li><a id='listlearner' href="javascript:void(0)">List Learner(s)</a></li>                                                                     
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFive">
+                                Assessment and Evaluation
+                            </a>
+                        </div>
+                        <div id="collapseFive" class="accordion-body collapse in">
+                            <div class="accordion-inner">
+                                <ul>
+                                	<li><a id='assignments' href="javascript:void(0)">Assignments</a></li>
+                                    <li><a id='evaluations' href="javascript:void(0)">Evalutations</a></li>
+                                    <li><a id='progresstrack' href="javascript:void(0)">Progress Tracking</a></li>
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseSix">
+                                Data Management
+                            </a>
+                        </div>
+                        <div id="collapseSix" class="accordion-body collapse in">
+                            <div class="accordion-inner">
+                                <ul>
+                                    <li><a id='addeval' href="javascript:void(0)">Add Evaluation</a></li>                                    
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                    
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseSeven">
+                                Discussion Forums
+                            </a>
+                        </div>
+                        <div id="collapseSeven" class="accordion-body collapse in">
+                            <div class="accordion-inner">
+                                <ul>
+                                    <li><a id='forum' href="#">Forum</a></li>
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$('#addcourse').click(function (e) {
+			e.preventDefault();
+			//History.pushState(null, "Add Course", '/course/add');
+			$('#content').html('').load('/course/add');
+		});
+		$('#listcourses').click(function (e) {
+			e.preventDefault();
+			//History.pushState(null, "List Courses", '/course/list');
+			$('#content').html('').load('/course/list');
+		});
+
+		$('#addfacilitator').click(function (e) {
+			$('#content').html('').load('/facilitator/add');
+		});
+
+		$('#addfacilitator').click(function (e) {
+			$('#forum').html('').load('/discussion/index');
+		});
+		
+		$('#listfacilitator').click(function (e) {
+			$('#content').html('').load('/facilitator/list');
+		});
+
+		$('#addlearner').click(function (e) {
+			$('#content').html('').load('/learner/add');
+		})
+		$('#listlearner').click(function (e) {
+			$('#content').html('').load('/learner/list');
+		});
+		$('#assignments').click(function (e) {
+			$('#content').html('').load('/assignment/list');
+		});
+		$('#evaluations').click(function (e) {
+			$('#content').html('').load('/course/evaluations');
+		});
+
+		$("#progresstrack").click(function (e) {
+			$("#content").html("").load("/assignment/progress");
+		});
+
+		$('#addeval').click(function (e) {
+			$('#content').html('').load('/course/addeval');
+		});
+
+		$('#forum').click(function (e) {
+			$('#content').html('').load('/discussion/index');
+		});
+		
+	});
+</script>            

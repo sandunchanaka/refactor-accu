@@ -1,0 +1,94 @@
+<div class="span3 accordion-outer">
+            
+            	<div class="accordion" id="leftMenu">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle active" data-toggle="collapse" data-parent="#leftMenu" href="#">
+                                  Facilitator Menu
+                            </a>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseTwo">
+                                Course Materials
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse" style="height: 0px; ">
+                            <div class="accordion-inner">
+                                <ul>                                    
+                                    <li><a class='menu' id='listcourses' data-url="/course/list" href="#">List Course(s)</a></li>                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseThree">
+                                Communications
+                            </a>
+                        </div>
+                        <div id="collapseThree" class="accordion-body collapse" style="height: 0px; ">
+                            <div class="accordion-inner" id='ModuleMenu'>
+                                <ul>
+                                    <li><a class="menu" data-url="/message/inbox" href="#">Inbox</a></li>
+                                    <li><a class="menu" data-url="/message/sent" href="#">Sent Items</a></li>                                    
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFour">
+                                Students
+                            </a>
+                        </div>
+                        <div id="collapseFour" class="accordion-body collapse" style="height: 0px; ">
+                            <div class="accordion-inner">
+                                <ul>
+                                    <li><a class='menu' data-url="/course/students" href="#">List Student</a></li>
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFive">
+                                Assessments
+                            </a>
+                        </div>
+                        <div id="collapseFive" class="accordion-body collapse" style="height: 0px; ">
+                            <div class="accordion-inner">
+                                <ul>
+                                    <li><a class='menu' data-url="/assignment/list" href="#">Assignments</a></li>
+                                    <li><a class="menu" data-url="/assignment/progress">Progress</a></li>
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseSix">
+                                Discussion Forums
+                            </a>
+                        </div>
+                        <div id="collapseSix" class="accordion-body collapse" style="height: 0px; ">
+                            <div class="accordion-inner">
+                                <ul>
+                                    <li><a class="menu" data-url="/discussion/index" id='forum' href="#">Forum</a></li>
+                                </ul>                 
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$("a.menu").click(function (e) {
+			var url = $(this).attr('data-url');
+			$("#content").load(url);
+		});
+		
+	});
+</script>            

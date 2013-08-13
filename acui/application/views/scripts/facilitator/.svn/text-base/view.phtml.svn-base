@@ -1,0 +1,237 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+
+									<div class="tabbable"> 
+                        				<ul class="nav nav-tabs">
+                            				<li class="active"><a href="#tab1" data-toggle="tab">Facilitator Profile</a></li>
+                            				<li><a href="#tab2" data-toggle="tab">Course &amp; Students</a></li>
+                            				<li><a href="#tab3" data-toggle="tab">Send Message</a></li>
+                            				<li><a href="#tab4" data-toggle="tab">Change Password</a></li>
+                        				</ul>
+				                        <div class="tab-content">
+				                            <div class="tab-pane active" id="tab1">
+				                            	<div style='float: left;'>
+					                            	<form id='facilitatorform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'facilitator', 'action' => 'save'), 'default', false); ?>'>
+					                                <div class="control-group">
+				                    					<label class="control-label">Facilitator Name: </label>
+				                    					<div class="controls"><?php echo $this->facilitator->name;?></div>
+				                    					<input type='hidden' name='user_id' id='user_id' value='<?php echo $this->facilitator->id; ?>' />
+				                    				</div>
+				                    				<div class="control-group">
+				                    					<label class="control-label">Facilitator Email</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->facilitator->email;?>
+				                    					</div>
+				                    				</div>
+				                    				
+				                    				<div class="control-group">
+				                    					<label class="control-label">Country</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->facilitator->country;?>
+				                    					</div>
+				                    				</div>
+				                    				
+				                    				<div class="control-group">
+				                    					<label class="control-label">Organization</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->facilitator->organization;?>
+				                    					</div>
+				                    				</div>
+				                    				
+				                    				<div class="control-group">
+				                    					<label class="control-label">Phone</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->facilitator->phone;?>
+				                    					</div>
+				                    				</div>
+				                    				
+				                    				<div class="control-group">
+				                    					<label class="control-label">Mobile</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->facilitator->phone2;?>
+				                    					</div>
+				                    				</div>
+				                    				
+				                    				<div class="control-group">
+				                    					<label class="control-label">Skype</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->facilitator->skype;?>
+				                    					</div>
+				                    				</div>
+				                    				
+				                    				<div class="control-group">
+				                    					<label class="control-label">Facebook</label>
+				                    					<div class="controls">
+				                    						<?php echo $this->facilitator->facebook;?>
+				                    					</div>
+				                    				</div>
+				                    				
+				                    				<div class="form-actions">
+				                        				<button id='btnedit' type="button" class="btn btn-primary" data-user-id="<?php echo $this->facilitator->id; ?>">Edit</button>
+				                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+			                        				</div>
+			                        				</form>
+			                        			</div>
+			                        			<form method="post" id='picform' action="/facilitator/uploadpic/id/<?php echo $this->facilitator->id; ?>">
+				                        			<div style='float: left;'>
+				                        				<div id='pic' style='width: 150px; height: 150px; border: solid 1px black;'>
+				                        					<?php if ($this->fileid == null) { ?>
+				                        						<span>Click Here to Upload Picture</span>
+				                        					<?php } else { ?>
+				                        						<img src="/facilitator/getpic/id/<?php echo $this->fileid; ?>" />
+				                        					<?php } ?>
+				                        				</div>
+				                        				<input id="userPicture" name='userPicture' type="file" style="visibility:hidden" />
+				                        				<input type="hidden" name="user_id" value="<?php echo $this->facilitator->id?>" />
+				                        			</div>
+			                        			</form>
+				                            </div>
+				                            <div class="tab-pane" id="tab2">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">Course Name</label>
+			                    					<div class="controls">
+			                    						<select name='course_id[]' id='course_id' multiple>
+			                    							<option value="">Select Course</option>
+			                    							<?php foreach ($this->courses as $course ) { ?>
+			                    								<?php 
+			                    									$sel = '';	
+			                    									$dsb = '';
+			                    									if (in_array($course->id,$this->cf)) $sel = 'selected';?>
+			                    								<option value='<?php echo $course->id; ?>' <?php echo $sel;?> <?php echo $dsb; ?>><?php echo $course->name;?></option>
+			                    							<?php } ?>
+			                    						</select>	                    			
+			                    					</div>
+			                    				</div>
+				                            	<div class="control-group">
+				                    					<label class="control-label" for="inputDescription">Students</label>
+				                    					<div class="controls">
+				                    						<?php foreach ($this->students as $student) { ?>
+				                    							<?php echo $student->name; ?> <br/>
+				                    						<?php } ?>			                    			
+				                    					</div>
+				                    				</div>	
+				                    				
+				                    				<div class="form-actions">
+				                    					<button id='btnsetcourse' class="btn btn-primary">Save</button>
+				                    				</div>			                    							                    				
+				                            </div>
+				                            
+				                            <div class="tab-pane" id="tab3">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">Send Message</label>
+			                    					<div class="controls">
+			                    						<textarea id='message' name='message'></textarea>	                    			
+			                    					</div>
+			                    				</div>		
+			                    				
+			                    				<div class="form-actions">
+			                        				<button id='btnsend' type="submit" class="btn btn-primary">Send Message</button>
+			                        				<button id='btnsendcancel' type="button" class="btn">Cancel</button>                        
+			                        			</div>
+			                    						                            	
+				                            </div>
+				                            
+				                            <div class="tab-pane" id="tab4">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">New Password</label>
+			                    					<div class="controls">
+			                    						<input type="text" id="password" name="password" value="" />	                    			
+			                    					</div>
+			                    				</div>		
+			                    				
+			                    				<div class="form-actions">
+			                        				<button id='btnpassword' type="button" data-user-id="<?php echo $this->facilitator->id;?>" class="btn btn-primary">Change Password</button>
+			                        				<button id='btnsendcancel' type="button" class="btn">Cancel</button>                        
+			                        			</div>
+			                    						                            	
+				                            </div>
+				                        </div>
+                    				</div>
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$("#btnpassword").click(function (e) {
+			var password = $("#password").val();
+			if (password == "") {
+				alert("Password can not be blank");
+				return false;
+			}
+
+			var options = {
+					url: "/facilitator/changepass/id/" + $(this).attr('data-user-id'),
+					type: "post",
+				dataType: "json",
+				data: "password=" + password,
+				success: function (json) {
+					alert("Password changed");
+				} 
+			}
+
+			$.ajax(options);
+
+			return false;
+			
+		});
+		
+		$("#pic").click(function (e) {
+			$("#userPicture").click();
+		});
+
+		$("#userPicture").change(function (e) {
+			var options = { type: 'post', dataType: 'json', success: function (json) {
+					$("#pic").html("").html('<img src="/facilitator/getpic/id/' + json.image + '" />');
+				}};
+
+			$("#picform").ajaxSubmit(options);
+		});
+
+		$("#btnedit").click(function (e) {
+			$("#content").html('').load("/facilitator/edit/id/" + $(this).attr('data-user-id'));
+			return false;
+		});
+		
+		$('#btnsend').click(function (e) {
+			var data = "to_user_id=" + $('#user_id').val();
+			    data += "&from_user_id=1";
+			    data += "&message=" + $('#message').val();
+
+			var options = {
+					data: data,
+					url: "/message/send",
+					type: "post",
+					datType: "json",
+					success: function(json) {
+						alert('Message Sent');
+					}
+				};
+			    
+			$.ajax(options);
+		});
+				
+		$('#btnsetcourse').click(function (e) {
+			var data = {course_id: $('#course_id').val(), user_id: $('#user_id').val()};
+			
+			$.ajax({
+				data: data,
+				url: "/facilitator/setcourse/",
+				type: "post",
+				dataType: 'json',
+				success: function(json) {
+					alert('Course Facilitator Set');
+					$("#content").html('').load("/facilitator/view/id/" + $('#user_id').val());
+				}
+				});			    
+		});
+		
+		$('#btnsubmit').click(function (e) {			
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+	});
+</script>                    

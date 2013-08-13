@@ -1,0 +1,68 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'save'), 'default', false); ?>'>
+			                    	
+			                    	<div class="tabbable"> <!-- Only required for left/right tabs -->
+                        				<ul class="nav nav-tabs">
+                            				<li class="active"><a href="#tab1" data-toggle="tab">Course Overview</a></li>                            				
+                        				</ul>
+				                        <div class="tab-content">
+				                            <div class="tab-pane active" id="tab1">
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputName">Course Name</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->course->name; ?>
+			                    					</div>
+			                    				</div>				                            
+				                                <div class="control-group">
+			                    					<label class="control-label" for="inputName">Course Overview</label>
+			                    					<div class="controls">
+			                    						<?php echo nl2br($this->course->description); ?>
+			                    					</div>
+			                    				</div>
+				                            
+				                            <?php foreach ($this->module_extra as $me) { ?>
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputName">Objective <?php echo $me->module_id; ?></label>
+			                    					<div class="controls">
+			                    						<?php echo nl2br($me->overview); ?> <br/>
+			                    						<a href="/course/download/type/mextra/id/<?php echo $me->module_id;?>/"><?php echo $me->file_name;?></a>
+			                    					</div>
+			                    				</div>
+				                            <?php } ?>
+				                            
+				                            </div>
+				                            
+				                            
+				                            
+				                            
+				                        </div>
+                    				</div>
+			                       
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$("#btnedit").click(function (e) {
+			$('#content').html('').load("/course/edit/id/" + $(this).attr('data-course-id'));
+			return false;
+		});
+
+		$(".module").click(function (e) {
+			$("#content").html('').load("/course/moduleview/id/" + $(this).attr('data-module-id'));
+		});
+		
+		$('#btnsubmit').click(function (e) {
+			
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

@@ -1,0 +1,82 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='facilitatorform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'facilitator', 'action' => 'update'), 'default', false); ?>'>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="inputName">Facilitator Name</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="inputName" value="<?php echo $this->f->name;?>" name='inputName' placeholder="Facilitator Name" />
+			                    		</div>
+			                    	</div>
+			                        <div class="control-group">
+			                    		<label class="control-label" for="inputEmail">Facilitator Email</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="inputEmail" value="<?php echo $this->f->email;?>" name='inputEmail' placeholder="Facilitator Email" />			                    			
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="country">Country</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="country" value="<?php echo $this->f->country;?>" name='country' placeholder="Country" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="organization">Organization</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="organization" value="<?php echo $this->f->organization;?>" name='organization' placeholder="Organization" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="phone">Phone</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="phone" value="<?php echo $this->f->phone;?>" name='phone' placeholder="Phone" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="phone2">Mobile</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="phone2" value="<?php echo $this->f->phone2;?>" name='phone2' placeholder="Mobile" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="skype">Skype</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="skype" value="<?php echo $this->f->skype;?>" name='skype' placeholder="Skype" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="facebook">Facebook</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="facebook" value="<?php echo $this->f->facebook;?>" name='facebook' placeholder="Facebook" />
+			                    		</div>
+			                    	</div>
+			                        <div class="form-actions">
+                        				<button id='btnsubmit' type="button" class="btn btn-primary">Update</button>
+                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+                        			</div>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#btnsubmit').click(function (e) {
+			var options = {
+					type: 'post',
+					dataType: 'json',
+					url: '/facilitator/update/id/<?php echo $this->f->id; ?>',
+					success: function(json) {
+						var facilitator_id = json.facilitator_id;
+						$('#content').html('').load('/facilitator/view/id/' + facilitator_id);
+					}
+				};
+			$("#facilitatorform").ajaxSubmit(options);
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

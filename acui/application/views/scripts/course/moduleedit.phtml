@@ -1,0 +1,275 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'moduleupdate'), 'default', false); ?>'>
+			                    	
+			                    	<div class="tabbable"> <!-- Only required for left/right tabs -->
+                        				<ul class="nav nav-tabs">
+                            				<li class="active"><a href="#tab1" data-toggle="tab">Module Overview</a></li>
+                            				<li><a href="#tab2" data-toggle="tab">Excercises</a></li>
+                            				<li><a href="#tab3" data-toggle="tab">Handouts</a></li>                            				
+                        				</ul>
+				                        <div class="tab-content">
+				                            <div class="tab-pane active" id="tab1">
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputName">Module Name</label>
+			                    					<div class="controls">
+			                    						<input type="text" name="moduleName" value="<?php echo $this->module->module_name; ?>" />
+			                    					</div>
+			                    				</div>				                            
+				                                <div class="control-group">
+			                    					<label class="control-label" for="inputName">Module Overview</label>
+			                    					<div class="controls">
+			                    						<textarea name="moduleOverview"><?php echo $this->mextra->overview; ?></textarea>
+			                    					</div>
+			                    				</div>
+			                    				
+			                    				<div class="control-group">
+			                    					<label class="control-label" for="inputName">Upload New (File)</label>
+			                    					<div class="controls">
+			                    						<?php if ($this->mextra->file_name != null) { ?>
+			                    							<div id='div_file_<?php echo $this->module->id; ?>'><a href='/course/download/type/mextra/id/<?php echo $this->module->id;?>'><?php echo $this->mextra->file_name; ?></a> <button type="button" data-module-id="<?php echo $this->module->id; ?>" class="delattach"><span>Del</span></button></div>
+			                    						<?php } ?>
+			                    						<input type="file" name="moduleOverviewFile" />
+			                    					</div>
+			                    				</div>
+			                    				
+				                            </div>
+				                            <div class="tab-pane" id="tab2">
+			                    					<?php foreach ($this->module_exe as $excercise) { ?>
+			                    					<div id="excercise_<?php echo $excercise->id;?>">
+			                    						<div style="text-align: right;">
+			                    							<button type="button" class="delexegroup" data-node-id="<?php echo $excercise->id; ?>"><span>Delete Section</span></button>
+			                    						</div>
+			                    						<div class="control-group">
+				                    						<label class="control-label" for="inputDescription">Excercise Name</label>
+					                    					<div class="controls">
+					                    						<input type="text" name='excerciseName_<?php echo $excercise->sort; ?>' value="<?php echo $excercise->name; ?>" />
+					                    					</div>
+				                    					</div>			                    					
+				                    					<div class="control-group">
+				                    					<label class="control-label" for="inputDescription">Excercise Overview</label>
+				                    					<div class="controls">
+				                    						<textarea name='excerciseOverview_<?php echo $excercise->sort; ?>'><?php echo $excercise->overview; ?></textarea>
+				                    					</div>
+				                    					</div>
+				                    					<div class="control-group">
+				                    						<label class="control-label" for="inputDescription">Excercise File</label>
+				                    						<div class="controls">
+				                    							<?php if ($excercise->file_name != null) { ?>
+				                    								<div id='exe_file_<?php echo $excercise->id; ?>'>
+				                    									<a href='/course/download/type/excercise/id/<?php echo $excercise->id;?>'><?php echo $excercise->file_name?></a>
+				                    									<button type="button" data-file-id='<?php echo $excercise->id; ?>' class='btndelexe'><span>Del</span></button> <br/>
+				                    								</div>
+				                    							<?php } ?>
+				                    							<input type="file" name="exefile_<?php echo $excercise->sort; ?>" />
+				                    						</div>
+				                    					</div>
+				                    				</div>
+			                    					<?php } ?>
+			                    					<div id="newexe">
+			                    					
+			                    					</div>
+			                    					<div>
+			                    						<button type="button" id="addexec"><span>Add Excercise</span></button>
+			                    					</div>		       
+			                    						                            	
+				                            </div>
+				                            
+				                            <div class="tab-pane" id="tab3">
+			                    					<?php foreach ($this->module_hand as $handout) { ?>			                    					
+			                    					<div id="handout_<?php echo $handout->id;?>">		
+			                    						<div style="text-align: right;">
+			                    							<button type="button" class="delhandgroup" data-node-id="<?php echo $handout->id; ?>"><span>Delete Section</span></button>
+			                    						</div>
+			                    						<div class="control-group">
+				                    						<label class="control-label" for="inputDescription">Handout Name</label>
+					                    					<div class="controls">
+					                    						<input type="text" name='handoutName_<?php echo $handout->sort; ?>' value="<?php echo $handout->name; ?>" />
+					                    					</div>
+				                    					</div>			                    						
+				                    					<div class="control-group">
+				                    						<label class="control-label" for="inputDescription">Handout Overview</label>
+				                    					<div class="controls">
+				                    						<textarea name="handoutOverview_<?php echo $handout->sort; ?>"><?php echo $handout->overview; ?></textarea>
+				                    					</div>
+				                    					</div>
+				                    					<div class="control-group">
+				                    						<label class="control-label" for="inputDescription">Handout File</label>
+				                    						<div class="controls">
+				                    							<div id='hand_file_<?php echo $handout->id; ?>'><a href='/course/download/type/handout/id/<?php echo $handout->id;?>'><?php echo $handout->file_name?></a>
+				                    							<button type="button" data-file-id='<?php echo $handout->id; ?>' class='btndelhand'><span>Del</span></button></div>
+				                    							<input type='file' name="handoutfile_<?php echo $handout->sort; ?>" />
+				                    						</div>
+				                    					</div>
+				                    				</div>				                    					
+			                    					<?php } ?>	
+			                    					<div id="newhand">
+			                    					
+			                    					</div>
+			                    					<div>
+			                    						<button type="button" id="addhandout"><span>Add Handout</span></button>
+			                    					</div>		                    				
+				                            </div>
+				                        </div>
+                    				</div>
+			                        <div class="form-actions">
+			                        	<input type="hidden" name="module_id" value="<?php echo $this->module->id; ?>" />
+                        				<button id='btnsave' type="submit" class="btn btn-primary">Save</button>
+                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+                        			</div>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+
+		$("#addexec").click(function (e) {
+			var htmlout = '<div class="control-group">'
+				+ '<label class="control-label" for="inputDescription">Excercise Name</label>'
+		        + '<div class="controls">'
+			    + '<input type="text" name="exerciseName[]" placeholder="Excercise Name" />'			                    			
+		        + '</div>'
+	            + '</div>'
+	         	 + '<div class="control-group">'
+			     + '<label class="control-label" for="inputDescription">Excercise Summary</label><div class="controls">'
+				 + '<textarea name="inputExcerciseDescription[]" placeholder="Excercise Summary"></textarea>'			                    			
+			     + '</div>'
+				 + '</div>'
+				 + '<div class="control-group">'
+			     + '<label class="control-label" for="inputName">Excercise File</label>'
+			     + '<div class="controls">'
+				 + '<input type="file" name="inputFileExcercise[]" placeholder="Module Overview" />'
+			     + '</div>'
+		         + '</div>';
+	         $("#newexe").append(htmlout);
+		});
+		
+		$("#addhandout").click(function (e) {
+			 var htmlout = '<div class="control-group">'
+				 + '<label class="control-label" for="inputDescription">Handout Name</label>'
+	        	 + '<div class="controls">'
+		    	 + '<input type="text" name="handoutName[]" placeholder="Handout Name" />'			                    			
+	        	 + '</div>'
+            	 + '</div>'	
+			     + '<div class="control-group">'
+			     + '<label class="control-label" for="inputDescription">Handout Summary</label><div class="controls">'
+				 + '<textarea name="inputHandoutDescription[]" placeholder="Handout Summary"></textarea>'			                    			
+			     + '</div>'
+				 + '</div>'
+				 + '<div class="control-group">'
+			     + '<label class="control-label" for="inputName">Handout File</label>'
+			     + '<div class="controls">'
+				 + '<input type="file" name="inputHandoutFile[]" placeholder="Module Overview" />'
+			     + '</div>'
+		         + '</div>';
+
+	         $("#newhand").append(htmlout);				
+
+		});
+		
+		$(".delhandgroup").click(function (e) {
+			var id = $(this).attr("data-node-id");
+			var options = {
+						url: "/course/delhandnode",
+						type: "post",
+						dataType: "json",
+						data: "node_id=" + id,
+						success: function (json) {
+							$("#handout_" + id).remove();
+						}						
+					};
+			$.ajax(options);
+			return false;
+		});
+
+		$(".delexegroup").click(function (e) {
+			var id = $(this).attr("data-node-id");
+			var options = {
+						url: "/course/delexenode",
+						type: "post",
+						dataType: "json",
+						data: "node_id=" + id,
+						success: function (json) {
+							$("#excercise_" + id).remove();
+						}						
+					};
+			$.ajax(options);
+			return false;
+		});
+		
+		$(".delattach").click(function (e) {
+			var module_id = $(this).attr('data-module-id');			
+			var options = {
+						url: '/course/delmodfile',
+						data: "module_id=" + module_id,
+						success: function (json) {
+							if (json.error) {
+								alert(json.error);
+							}
+							$("#div_file_" + module_id).remove();
+						},
+					};
+
+			$.ajax(options);
+			return false;
+		});
+
+		$(".btndelexe").click( function (e) {
+			var file_id = $(this).attr('data-file-id');			
+			var options = {
+						url: '/course/delexefile',
+						data: "file_id=" + file_id,
+						success: function (json) {
+							if (json.error) {
+								alert(json.error);
+							}
+							$("#exe_file_" + file_id).remove();
+						},
+					};
+
+			$.ajax(options);
+			return false;
+		});
+
+		$(".btndelhand").click( function (e) {
+			var file_id = $(this).attr('data-file-id');			
+			var options = {
+						url: '/course/delhandfile',
+						data: "file_id=" + file_id,
+						success: function (json) {
+							if (json.error) {
+								alert(json.error);
+							}
+							$("#hand_file_" + file_id).remove();
+						},
+					};
+
+			$.ajax(options);
+			return false;
+		});
+		
+		$(".module").click(function (e) {
+			$("#content").html('').load("/course/moduleview/id/" + $(this).attr('data-module-id'));
+		});
+		
+		$('#btnsave').click(function (e) {	
+			var options = {
+						type: 'post',
+						dataType: 'json',
+						success: function (json) {
+							alert("Course Updated");
+							$("#content").html('').load('/course/moduleview/id/' + json.module_id);
+						}
+					};
+			$("#loginform").ajaxSubmit(options);		
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>

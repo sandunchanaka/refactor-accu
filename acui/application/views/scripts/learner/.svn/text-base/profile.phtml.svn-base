@@ -1,0 +1,175 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+
+									<div class="tabbable"> 
+                        				<ul class="nav nav-tabs">
+                            				<li class="active"><a href="#tab1" data-toggle="tab">Learner Profile</a></li>                            				
+                        				</ul>
+				                        <div class="tab-content">
+				                            <div class="tab-pane active" id="tab1">
+				                            	<div style="float: left;">
+				                            	<form id='loginform' class="form-horizontal">
+				                                <div class="control-group">
+			                    					<label class="control-label">Learner Name: </label>
+			                    					<div class="controls"><?php echo $this->learner->name;?></div>
+			                    					<input type='hidden' name='user_id' id='user_id' value='<?php echo $this->learner->id; ?>' />
+			                    				</div>
+			                    				<div class="control-group">
+			                    					<label class="control-label">Learner Id: </label>
+			                    					<div class="controls"><?php echo $this->learner->secondary_id;?></div>			                    					
+			                    				</div>
+			                    				<div class="control-group">
+			                    					<label class="control-label">Learner Email</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->learner->email;?>
+			                    					</div>
+			                    				</div>
+			                    				<div class="control-group">
+			                    					<label class="control-label">Country</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->learner->country;?>
+			                    					</div>
+			                    				</div>
+			                    				
+			                    				<div class="control-group">
+			                    					<label class="control-label">Organization</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->learner->organization;?>
+			                    					</div>
+			                    				</div>
+			                    				
+			                    				<div class="control-group">
+			                    					<label class="control-label">Phone</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->learner->phone;?>
+			                    					</div>
+			                    				</div>
+			                    				
+			                    				<div class="control-group">
+			                    					<label class="control-label">Mobile</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->learner->phone2;?>
+			                    					</div>
+			                    				</div>
+			                    				
+			                    				<div class="control-group">
+			                    					<label class="control-label">Skype</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->learner->skype;?>
+			                    					</div>
+			                    				</div>
+			                    				
+			                    				<div class="control-group">
+			                    					<label class="control-label">Facebook</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->learner->facebook;?>
+			                    					</div>
+			                    				</div>
+			                    				<div class="form-actions">
+				                        				<button id='btnedit' type="button" class="btn btn-primary" data-user-id="<?php echo $this->learner->id; ?>">Edit</button>
+				                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+			                        				</div>
+			                    				</form>
+			                    				</div>
+			                    				<form method="post" id='picform' action="/facilitator/uploadpic/id/<?php echo $this->learner->id; ?>">
+				                        			<div style='float: left;'>
+				                        				<div id='pic' style='width: 150px; height: 150px; border: solid 1px black;'>
+				                        					<?php if ($this->fileid == null) { ?>
+				                        						<span>Click Here to Upload Picture</span>
+				                        					<?php } else { ?>
+				                        						<img src="/facilitator/getpic/id/<?php echo $this->fileid; ?>" />
+				                        					<?php } ?>
+				                        				</div>
+				                        				<input id="userPicture" name='userPicture' type="file" style="visibility:hidden" />
+				                        				<input type="hidden" name="user_id" value="<?php echo $this->learner->id?>" />
+				                        			</div>
+			                        			</form>
+				                            </div>
+				                            
+				                        </div>
+                    				</div>
+			                                  
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$("#btnpassword").click(function (e) {
+			var password = $("#password").val();
+			if (password == "") {
+				alert("Password can not be blank");
+				return false;
+			}
+
+			var options = {
+					url: "/facilitator/changepass/id/" + $(this).attr('data-user-id'),
+					type: "post",
+				dataType: "json",
+				data: "password=" + password,
+				success: function (json) {
+					alert("Password changed");
+				} 
+			}
+
+			$.ajax(options);
+
+			return false;
+			
+		});
+
+		$("#pic").click(function (e) {
+			$("#userPicture").click();
+		});
+
+		$("#userPicture").change(function (e) {
+			var options = { type: 'post', dataType: 'json', success: function (json) {
+					$("#pic").html("").html('<img src="/facilitator/getpic/id/' + json.image + '" />');
+				}};
+
+			$("#picform").ajaxSubmit(options);
+		});
+		
+		$('#btnsend').click(function (e) {
+			var data = "to_user_id=" + $('#user_id').val();
+			    data += "&from_user_id=1";
+			    data += "&message=" + $('#message').val();
+
+			var options = {
+					data: data,
+					url: "/message/send",
+					type: "post",
+					datType: "json",
+					success: function(json) {
+						alert('Message Sent');
+					}
+				};
+			    
+			$.ajax(options);
+		});
+
+		$("#btnedit").click(function (e) {
+			$("#content").html('').load("/learner/edit/id/" + $(this).attr('data-user-id'));
+			return false;
+		});
+				
+		$('#btnsetcourse').click(function (e) {
+			var data = "course_id=" + $('#course_id').val();
+			    data += "&user_id=" + $('#user_id').val();
+
+			$.ajax({
+				data: data,
+				url: "/learner/setcourse/",
+				type: "post",
+				dataType: 'json',
+				success: function(json) {
+					alert('Course Set');
+				}
+				});			    
+		});
+		
+		$('#btnsubmit').click(function (e) {			
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+	});
+</script>                    

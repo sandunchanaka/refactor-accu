@@ -1,0 +1,58 @@
+ <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Learner Name</th>
+                                <th>Learner Email</th>
+                                <th>Course</th>
+                                <th>Facilitator</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <?php foreach ($this->learners as $learner) { ?>
+								<tr class="<?php echo $this->cycle(array('', 'info'))->next(); ?>">
+									<td><?php echo $learner->id;?></td>
+									<td><a class="learner" href="#" learner_id="<?php echo $learner->id;?>"><?php echo $learner->name;?></a></td>
+									<td><?php echo $learner->email;?></td>
+									<td><?php echo $learner->course_name;?></td>
+									<td><?php echo $learner->facilitator_name;?></td>
+									<td>
+										<select data-user-id="<?php echo $learner->id; ?>" class="ustatus" name='status_id[]' id='status_<?php echo $learner->id; ?>'>
+											<option <?php if ($learner->status == 'A') echo 'selected'; ?> value="A">Active</option>
+											<option <?php if ($learner->status == 'D') echo 'selected'; ?> value="D">DeActive</option>
+										</select>										
+									</td>
+								</tr>
+							<?php } ?>
+                        </tbody>
+                    </table>
+                    
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$(".learner").click(function (e) {
+			$("#content").html('').load("/learner/view/id/" + $(this).attr('learner_id'));
+			return false;
+		});
+		$(".ustatus").change(function (e) {
+			e.preventDefault();
+			var user_id = $(this).attr('data-user-id');
+            var status = $(this).val();
+
+            var data = { user_id: user_id, status: status };
+
+            var options = {
+						url: "/learner/setstatus",
+						type: "post",
+						dataType: "json",
+						data: data,
+						success: function (json) {
+							alert("Status changed");
+						}
+                    };
+
+            $.ajax(options);
+			
+		});
+	});
+ </script>                    

@@ -1,0 +1,57 @@
+<?php ?>
+<div style="height: 100%; padding-left: 20px;">
+<form method="post" action="/index/sendform">
+<div>Course Name</div>
+<div style="float: left;">
+<input type="radio" name='course' value='CUDCC' /> Credit Union Director's Competency Course (CUDCC) <br/>
+<input type="radio" name='course' value='CUCCC' /> Credit Union CEO's Competency Course (CUCCC) <br/>
+<input type="radio" name='course' value='CUASCC' /> Credit Union Audit/Supervisory Committee's Competency Course (CUASCC) <br/>
+<input type="radio" name='course' value='CULOCC' /> Credit Union Loan Officer's Competency Course (CULOCC) <br/>
+</div>
+
+<div style="clear: both;">Title</div>
+<div><select name="title">
+<option value="MR">Mr.</option>
+<option value="MRS">Mrs.</option>
+<option value="MS">Ms.</option>
+</select></div>
+
+<div style="clear: both; float: left;">Name</div>
+<div style="float: left;"><input type="text" name="firstname" size=40 /></div>
+<div style="float: left;">Surname</div>
+<div style="float: left;"><input type="text" name="lastname" size=40 /></div>
+
+<div style="clear: both; float: left;">Gender</div>
+<div style="float: left;"><input type="radio" name="gender" value="male" /> Male  <input type="radio" name="gender" value="female" /> Female</div>
+
+<div style="clear: both; float: left;">Mailling Address</div>
+<div style="float: left;"><textarea rows="5" cols="50" style="width: 350px;" name="mailingaddress"></textarea></div>
+
+<div style="clear: both">Home Phone</div>
+<div><input type="text" name="homephone" /></div>
+
+<div>Work Phone</div>
+<div><input type="text" name="workphone" /></div>
+
+<div>Mobile Phone</div>
+<div><input type="text" name="mobilephone" /></div>
+
+<div>Skype</div>
+<div><input type="text" name="skype" /></div>
+
+<div>Facebook</div>
+<div><input type="text" name="facebook" /></div>
+
+<div>Position in Credit Union</div>
+<div><input type="text" name="position" /></div>
+
+<div>Name &amp; Address of Credit Union</div>
+<div><textarea name="cuaddress" rows="5" cols="50" style="width: 350px;"></textarea></div>
+
+<div>Name of Federation Affiliated</div>
+<div><input type="text" name="federation" /></div>
+
+<button><span>Submit Registration</span></button>
+
+</form>
+</div>

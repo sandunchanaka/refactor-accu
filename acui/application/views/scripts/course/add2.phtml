@@ -1,0 +1,50 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'save'), 'default', false); ?>'>
+			                    	<?php for ($i=1; $i<= $this->number_of_modules; $i++) { ?>
+				                    	<div class="control-group">
+				                    		<label class="control-label" for="inputName_<?php echo $i;?>">Module <?php echo $i;?></label>
+				                    		<div class="controls">
+				                    			<input type="text" id="inputName_<?php echo $i;?>" name='inputName[]' placeholder="Module Name">
+				                    		</div>
+				                    	</div>
+				                     <?php } ?>
+			                        <div class="form-actions">
+			                        	<input type="hidden" value="<?php echo $this->course_id;?>" name="course_id" id="course_id" />
+                        				<button id='btnsubmit' type="submit" class="btn btn-primary">Next</button>
+                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+                        			</div>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#btnsubmit').click(function (e) {
+			var data = "course_id=" + $('#course_id').val();
+			<?php for ($i=1; $i<= $this->number_of_modules; $i++) { ?>
+				data += "&inputName[]=" + $('#inputName_<?php echo $i;?>').val();
+			<?php } ?>
+			$.ajax({
+					data: data,
+					type: 'post',
+					dataType: 'json',
+					url: '/course/save2',
+					success: function(json) {
+						var course_id = json.course_id;
+						$('#content').html('').load('/course/add3/id/' + course_id);
+					},
+					error: function (error) {
+						alert(error.responseText);
+					}
+				});
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

@@ -1,0 +1,330 @@
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+body {
+	background:#FFF;
+	font-family:Helvetica, Arial, sans-serif;
+	font-size:14px;
+	color:#5e5e5e;
+
+}
+
+.wrapper-main {
+	background-color:#efefef;
+}
+
+
+
+.header{
+	background-color:#40ac48;
+	padding:2% 0 0% 0;
+}
+
+.header h1 {
+	font-size:36px;
+	color:#FFF;
+}
+
+.header h5 {
+	padding:1% 0 4% 0;
+}
+
+h5 {
+	color:#FFF;
+	font-size:18px;
+}
+
+.pack {
+	margin:0 auto;
+	width:85%;
+}
+
+.italic {
+	font-style:italic;
+	padding:0.5% 0 0 0;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+.header p {
+	text-align:center;
+}
+
+.header {
+	padding:6% 0;
+}
+
+.header h1,
+.header h5{
+	text-align:center;
+	line-height:140%;
+	padding-bottom:2%;
+	
+}
+
+.header h1 {
+	font-size:27px;
+}
+
+.italic {
+	font-size:14px;
+}
+
+.wrapper-main .navbar .nav > li > a:hover {
+	color:#253f8d !important;
+}
+
+.wrapper-main .navbar .nav > li > a{
+	text-align:center;
+}
+
+.navbar .btn-navbar {
+    display: block;
+    margin-bottom: 2%;
+}
+
+.pack {
+	margin:0 auto;
+	width:95%;
+}
+
+.web:hover p {
+	line-height:20px;
+}
+
+
+
+.footer p {
+	padding-top:20px;
+}
+
+.main-img {
+	display:none;
+}
+
+
+}
+
+.wrapper-main .navbar-inner {
+    background-color: #253f8d;
+    background-image:none;
+    border:none;
+    border-radius: 0px 0px 0px 0px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.067);
+    min-height: 45px;
+    padding-left: 0%;
+    padding-right:0%;
+}
+
+.wrapper-main .navbar .nav > li > a {
+    color:#8ca0da;
+    float: none;
+    padding: 15px 15px;
+    text-decoration: none;
+    text-shadow: 0 0px 0 #FFFFFF;
+}
+
+.main-menu {
+	background-color: #253f8d;
+}
+
+.pack li a,
+.main-menu li a {
+	font-size:16px;
+	text-shadow:none !important;
+	font-weight:normal !important;
+}
+
+
+.active a {
+	color:#000;
+}
+
+.pack li .active {
+	background:#FFF;
+	color:#253f8d !important;
+}
+
+.pack li .active:hover {
+	color:#006 !important;
+	background-color:#FFF !important;
+	
+}
+
+.pack li a:hover,
+.main-menu li a:hover {
+	color:#FFF !important;
+}
+
+.white {
+	width:100%;
+	height:7px;
+	background:#FFF;
+}
+
+.main-menu .navbar{
+	margin-bottom:0;
+}
+
+.content {
+	background:#efefef;
+}
+
+h3 {
+	font-size:24px;
+	color:#373737;
+	padding-bottom:10px;
+}
+
+.faq {
+	padding-bottom:15px;
+}
+
+.faq,
+.commen,
+.registration,
+.Courses  {
+	margin-left:5px;
+}
+
+.faq li,
+.commen li,
+.registration li,
+.Courses li  {
+	font-size:14px;
+	color:#5e5e5e;
+	font-weight:600;
+	line-height:20px;
+	padding-bottom:10px;
+	list-style:url(../img/list-image.jpg);
+	margin-left:10px;
+}
+
+.faq li span,
+.commen li span,
+.registration li span,
+.Courses li span {
+	font-style:italic;
+	font-weight:normal;
+}
+
+.side-bar {
+	background:#253f8d;
+	padding:5%;
+}
+
+.track {
+	color:#FFF;
+	font-size:18px;
+	padding-bottom:2%;
+}
+
+.details li {
+	list-style:url(../img/list-image.jpg);
+	font-size:14px;
+	color:#7d94d8;
+	padding-bottom:10px;
+	line-height:20px;
+}
+
+.details {
+	padding-left:5%;
+}
+
+.footer {
+	background:#2d2d2d;
+	padding:2% 2% 5% 2%;
+}
+
+.footer p {
+	color:#636262;
+	font-size:12px;
+	line-height:20px;
+}
+.footer p a {
+	color:#FFF;
+	text-decoration:none;
+}
+
+.footer p a:hover {
+	color:#706262;
+}
+
+.web {
+	text-decoration:underline !important;
+}
+
+.web:hover {
+	text-decoration:none !important;
+}
+
+.thumb {
+	display:none;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+	
+	.thumb {
+	display:inherit !important;
+}
+
+.img1,
+.img2,
+.img3 {
+	padding:2% 4%;
+}
+
+}
+
+.inner p {
+	line-height:20px;
+	padding-bottom:10px;
+}
+
+.sub-list li {
+	list-style:disc;
+	font-weight:normal;
+}
+
+.sub-list li strong {
+	font-style:italic;
+	font-weight:normal !important;
+}
+
+.bold {
+	font-weight:bold !important;
+}
+
+h4 {
+	color:#2D2D2D;
+	font-size:16px;
+	padding-bottom:10px;
+	text-decoration:underline;
+}
+
+.sub-second-level li{
+	list-style:circle;
+}
+
+.pack li .website:hover {
+	color:#253f8d!important;
+	text-decoration:underline;
+}
+
+.contact p {
+	font-size:16px;
+	line-height:23px;
+	padding-bottom:15px;
+}
+
+.contact p strong {
+	color:#1D1D1D;
+}
+
+
+
+
+	
+	
+
+

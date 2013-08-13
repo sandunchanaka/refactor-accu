@@ -1,0 +1,71 @@
+<table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Number of Posts</th>
+                                <th>Last Post Date</th>
+                                <?php if ($this->delete) { ?>
+                                	<th>Delete></th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<?php foreach ($this->discussions as $discussion) { ?>
+                            <tr class='<?php echo $this->cycle(array('', 'info'))->next();?>'>
+                                <td><a class="discussion" data-id="<?php echo $discussion->id; ?>" href="#"><?php echo $discussion->name;?></a></td>
+                                <td><?php echo $discussion->number_of_posts;?></td>
+                                <td><?php echo $discussion->last_post_date;?></td>
+                                <?php if ($this->delete) { ?>
+                                	<td><button type='button' class='delete' data-id='<?php echo $discussion->id;?>'><span>Delete</span></button></td>
+                                <?php } ?>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    
+                    <div>
+                    	<form method="post" action="/discussion/add">
+                    		Discussion Name <input type="text" name="discussion" id="discussion" />
+                    		<button type="button" id="adddiscussion"><span>Add Discussion</span></button>
+                    	</form>
+                    </div>
+                    
+ <script type="text/javascript">
+	$(document).ready(function (e) {
+
+		$("button.delete").click(function (e) {
+			e.preventDefault();
+			var that = $(this);
+			var options = {
+				url: "/discussion/delete/",
+				type: "post",
+				dataType: "json",
+				data: { id : that.attr('data-id') },
+				success: function (json) {
+					that.parent().parent().remove();		
+				} 
+			};
+			$.ajax(options);
+		});
+		
+        $("a.discussion").click(function (e) {
+			e.preventDefault();
+			$("#content").load("/discussion/view/id/" + $(this).attr('data-id'));
+        });
+		 
+		$("#adddiscussion").click(function (e) {
+			e.preventDefault();
+			var data = { "discussion" : $('#discussion').val() };
+			var options = {
+				url: "/discussion/add",
+				type: "post",
+				dataType: "json",
+				data: data,
+				success: function (e) {
+					$('#content').load("/discussion/index");					
+				}
+			};
+			$.ajax(options);
+		});
+	});
+ </script>

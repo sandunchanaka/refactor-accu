@@ -1,0 +1,64 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+ <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Facilitator Name</th>
+                                <th>Facilitator Email</th>
+                                <th>Course</th>
+                                <th>Students</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <?php foreach ($this->facilitators as $facilitator) { ?>
+								<tr class="<?php echo $this->cycle(array('', 'info'))->next(); ?>">
+									<td><?php echo $facilitator->id;?></td>
+									<td><a class="course" href="#" facilitator_id="<?php echo $facilitator->id;?>"><?php echo $facilitator->name;?></a></td>
+									<td><?php echo $facilitator->email;?></td>
+									<td><?php echo $facilitator->course;?></td>
+									<td>
+										<?php foreach ($facilitator->students as $student) { ?>
+											<?php echo $student; ?> <br/>
+										<?php } ?>
+									</td>
+									<td>
+										<select data-user-id="<?php echo $facilitator->id; ?>" class="ustatus" name='status_id[]' id='status_<?php echo $facilitator->id; ?>'>
+											<option <?php if ($facilitator->status == 'A') echo 'selected'; ?> value="A">Active</option>
+											<option <?php if ($facilitator->status == 'D') echo 'selected'; ?> value="D">DeActive</option>
+										</select>	
+									</td>
+								</tr>
+							<?php } ?>
+                        </tbody>
+                    </table>
+                    
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$(".course").click(function (e) {
+			$("#content").html('').load("/facilitator/view/id/" + $(this).attr('facilitator_id'));
+			return false;
+		});
+		
+		$(".ustatus").change(function (e) {
+			e.preventDefault();
+			var user_id = $(this).attr('data-user-id');
+            var status = $(this).val();
+
+            var data = { user_id: user_id, status: status };
+
+            var options = {
+						url: "/learner/setstatus",
+						type: "post",
+						dataType: "json",
+						data: data,
+						success: function (json) {
+							alert("Status changed");
+						}
+                    };
+
+            $.ajax(options);
+			
+		});
+	});
+ </script>                    

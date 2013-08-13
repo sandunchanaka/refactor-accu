@@ -1,0 +1,24 @@
+
+<form method="post">
+New Password <input type="text" id="password" /> <br/>
+<button type="button" id="changepass"><span>Change Pass</span></button>
+</form>
+
+<script type="text/javascript">
+   $(document).ready(function (e) {
+       $("#changepass").click(function (e) {
+			e.preventDefault();
+			var data = { "password" : $("#password") };
+			var options = {
+					url: "/profile/password",
+					type: "post",
+					dataType: "json",
+					data: data,
+					success: function (e) {
+						$("#content").load("/index/dashboard");
+					}
+			}
+			
+       });
+   });
+</script>

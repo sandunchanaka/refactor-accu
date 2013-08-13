@@ -1,0 +1,10 @@
+1). Change 1st 3 images of the home page and header font .
+
+2). Virtual Parties ==> virtual Tour
+
+3)Direction ==> use google API and find correct location of Alaska and give the perticular cordinates.
+
+4) parties==> change headings "welcome to our parties"
+
+
+

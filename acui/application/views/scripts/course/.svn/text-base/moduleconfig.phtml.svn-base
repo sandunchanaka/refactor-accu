@@ -1,0 +1,196 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='moduleconfig' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'modulesave'), 'default', false); ?>' enctype="multipart/form-data">
+			                    	
+			                    	<div class="alert alert-success">
+                    					<button type="button" class="close" data-dismiss="alert">x</button>
+                    					<strong>Complete</strong> All 3 Tabs Before pressing the Save Button.
+                    				</div>
+			                    	
+			                    	<div class="tabbable"> <!-- Only required for left/right tabs -->
+                        				<ul class="nav nav-tabs">
+                            				<li class="active"><a href="#tab1" data-toggle="tab">Module Overview</a></li>
+                            				<li><a href="#tab2" data-toggle="tab">Handouts</a></li>
+                            				<li><a href="#tab3" data-toggle="tab">Excersises</a></li>
+                        				</ul>
+				                        <div class="tab-content">
+				                            <div class="tab-pane active" id="tab1">
+				                                <div class="control-group">
+			                    					<label class="control-label" for="inputName">Module Overview</label>
+			                    					<div class="controls">
+			                    						<textarea id="inputOverview" name='inputOverview' placeholder="Module Overview"></textarea>
+			                    					</div>
+			                    				</div>
+			                    				<div class="control-group">
+			                    					<label class="control-label" for="inputName">Module Overview (File)</label>
+			                    					<div class="controls">
+			                    						<input type='file' id="inputOverviewFile" name='inputOverviewFile' placeholder="Module Overview" />
+			                    					</div>
+			                    				</div>
+				                            </div>
+				                            <div class="tab-pane" id="tab2">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">Number of Handouts</label>
+			                    					<div class="controls">
+			                    						<select id='number_of_handouts' name='number_of_handouts'>
+			                    							<option value='1'>1</option>
+			                    							<option value='2'>2</option>
+			                    							<option value='3'>3</option>
+			                    							<option value='4'>4</option>
+			                    							<option value='5'>5</option>
+			                    						</select>				                    			
+			                    					</div>
+			                    				</div>
+				                            	<div id='modulehandouts'>
+					                                <div class="control-group">
+				                    					<label class="control-label" for="inputDescription">Handout Name</label>
+				                    					<div class="controls">
+				                    						<textarea id="handoutName_1" name='handoutName[]' placeholder="Handout Name"></textarea>			                    			
+				                    					</div>
+				                    				</div>
+					                                <div class="control-group">
+				                    					<label class="control-label" for="inputDescription">Handout Summary</label>
+				                    					<div class="controls">
+				                    						<textarea id="inputHandoutDescription_1" name='inputHandoutDescription[]' placeholder="Handout Summary"></textarea>			                    			
+				                    					</div>
+				                    				</div>
+				                    				<div class="control-group">
+				                    					<label class="control-label" for="inputName">Handout File</label>
+				                    					<div class="controls">
+				                    						<input type='file' id="inputHandoutFile_1" name='inputHandoutFile[]' placeholder="Module Overview" />
+				                    					</div>
+				                    				</div>
+			                    				</div>
+				                            </div>
+				                            
+				                            <div class="tab-pane" id="tab3">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">Number of Excercises</label>
+			                    					<div class="controls">
+			                    						<select id='number_of_excercise' name='number_of_excercise'>
+			                    							<option value='1'>1</option>
+			                    							<option value='2'>2</option>
+			                    							<option value='3'>3</option>
+			                    							<option value='4'>4</option>
+			                    							<option value='5'>5</option>
+			                    						</select>				                    			
+			                    					</div>
+			                    				</div>
+				                            	<div id='moduleexcercise'>
+				                            		<div class="control-group">
+				                    					<label class="control-label" for="inputDescription">Excercise Name</label>
+				                    					<div class="controls">
+				                    						<textarea id="execerciseName_1" name='exerciseName[]' placeholder="Excercise Name"></textarea>			                    			
+				                    					</div>
+				                    				</div>
+					                                <div class="control-group">
+				                    					<label class="control-label" for="inputDescription">Excercise Summary</label>
+				                    					<div class="controls">
+				                    						<textarea id="inputExcerciseDescription_1" name='inputExcerciseDescription[]' placeholder="Excercise Summary"></textarea>			                    			
+				                    					</div>
+				                    				</div>
+				                    				<div class="control-group">
+				                    					<label class="control-label" for="inputName">Excercise File</label>
+				                    					<div class="controls">
+				                    						<input type='file' id="inputExcerciseFile_1" name='inputExcerciseFile[]' placeholder="Module Overview" />
+				                    					</div>
+				                    				</div>
+			                    				</div>
+				                            </div>
+				                        </div>
+                    				</div>
+			                        <div class="form-actions">
+			                        	<input type="hidden" name="course_id" id="course_id" value="<?php echo $this->course_id; ?>" />
+			                        	<input type="hidden" name="module_id" id="module_id" value="<?php echo $this->module_id; ?>" />
+                        				<button id='btnsubmit' type="submit" class="btn btn-primary">Save</button>
+                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+                        			</div>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#number_of_excercise').change(function (e) {
+
+			 var htmlout = "";
+	         for (var i=0; i < $(this).val(); i++) {
+			    htmlout += '<div class="control-group">'
+				        + '<label class="control-label" for="inputDescription">Excercise Name</label>'
+				        + '<div class="controls">'
+					    + '<input type="text" name="exerciseName[]" placeholder="Excercise Name" />'			                    			
+				        + '</div>'
+			            + '</div>'
+			         + '<div class="control-group">'
+				     + '<label class="control-label" for="inputDescription">Excercise Summary</label><div class="controls">'
+					 + '<textarea id="inputExcerciseDescription_' + i + '" name="inputExcerciseDescription[]" placeholder="Excercise Summary"></textarea>'			                    			
+				     + '</div>'
+					 + '</div>'
+					 + '<div class="control-group">'
+				     + '<label class="control-label" for="inputName">Excercise File</label>'
+				     + '<div class="controls">'
+					 + '<input type="file" id="inputName_' + i + '" name="inputFileExcercise[]" placeholder="Module Overview" />'
+				     + '</div>'
+			         + '</div>';
+		     }
+			
+			$('#moduleexcercise').html('').append(htmlout);
+		});
+		
+		$('#number_of_handouts').change(function (e) {
+
+			 var htmlout = "";
+	         for (var i=0; i < $(this).val(); i++) {
+			    htmlout +=  '<div class="control-group">'
+		        	 + '<label class="control-label" for="inputDescription">Handout Name</label>'
+		        	 + '<div class="controls">'
+			    	 + '<input type="text" name="handoutName[]" placeholder="Handout Name" />'			                    			
+		        	 + '</div>'
+	            	 + '</div>'	
+				     + '<div class="control-group">'
+				     + '<label class="control-label" for="inputDescription">Handout Summary</label><div class="controls">'
+					 + '<textarea id="inputHandoutDescription_' + i + '" name="inputHandoutDescription[]" placeholder="Handout Summary"></textarea>'			                    			
+				     + '</div>'
+					 + '</div>'
+					 + '<div class="control-group">'
+				     + '<label class="control-label" for="inputName">Handout File</label>'
+				     + '<div class="controls">'
+					 + '<input type="file" id="inputHandoutFile_' + i + '" name="inputHandoutFile[]" placeholder="Module Overview" />'
+				     + '</div>'
+			         + '</div>';			
+		     }
+			
+			$('#modulehandouts').html('').append(htmlout);
+		});
+
+
+	    $('#moduleconfig').ajaxForm();
+		
+		$('#btnsubmit').click(function (e) {
+			e.preventDefault();
+			
+			$('#moduleconfig').ajaxSubmit(
+					{
+						type: 'post',
+						dataType: 'json',
+						cache: false,
+						success: function (json) {
+							alert('File(s) has been successfuly uploaded');
+							$('#content').html('').load('/course/add3/id/' + json.course_id);
+						}
+				    }
+					);
+			
+			
+		});
+
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

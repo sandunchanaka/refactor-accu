@@ -1,0 +1,95 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+	<form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'index', 'action' => 'login'), 'default', false); ?>'>
+		<div class="control-group">
+			<label class="control-label" for="inputName">Module</label>
+			<div class="controls">
+				<select id="module_id" name='module_id'>
+						<option value="">Select Module</option>
+					<?php foreach ($this->modules as $module) {?>
+						<option value="<?php echo $module->id; ?>"><?php echo $module->module_name; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputName">Assignment</label>
+			<div class="controls">
+				<select id="module_excercise_id" name='module_excercise_id'>
+
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputName">File</label>
+			<div class="controls">
+				<input type="file" name="inputFile" id="inputFile" placeholder="Name">
+			</div>
+		</div>
+		<div class="form-actions">
+        	<button id='btnsubmit' type="button" class="btn btn-primary">Submit</button>
+            <button id='btncancel' type="button" class="btn">Cancel</button>                        
+        </div>
+	</form>
+                    		
+                    		<table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>File Name</th>
+                                <th>Submission Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<?php foreach ($this->assignments as $assignment) { ?>
+                            <tr class='<?php echo $this->cycle(array('', 'info'))->next();?>'>
+                                <td><?php echo $assignment->id;?></td>
+                                <td><a href="/assignment/download/id/<?php echo $assignment->id;?>"><?php echo $assignment->file_name;?></a></td>
+                                <td><?php echo $assignment->created_date;?></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$("#module_id").change(function (e) {
+			var data = "module_id=" + $(this).val();
+
+			var options = {
+						url: "/assignment/getexec",
+						type: "post",
+						dataType: "json",
+						data: data,
+						success: function (json) {
+							$("#module_excercise_id").html('');
+							$.each(json.items, function (k,v) {
+								$("#module_excercise_id").append("<option value='" + v.id + "'>" + v.name + "</option>");
+							});
+						},
+					};
+
+			$.ajax(options);
+		});
+
+		$('#btnsubmit').click(function (e) {
+			var options = {
+						success: function (json) {
+							$("#content").html("").load("/assignment/submit");
+						},
+						type: "POST",
+						dataType: "json",
+						url: "/assignment/sendfile"
+					};
+			$('#loginform').ajaxSubmit(options);
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+			$('#inputEmail').val('');
+			$('#inputPassword').val('');
+		});
+
+	});
+</script>                    

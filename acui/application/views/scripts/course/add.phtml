@@ -1,0 +1,114 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='courseform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'save'), 'default', false); ?>'>
+			                    	<fieldset>
+			                    		<legend>Use this form to add a course.</legend>
+				                    	<div class="control-group">
+				                    		<label class="control-label" for="inputName">Course Name</label>
+				                    		<div class="controls">
+				                    			<input type="text" id="inputName" name='inputName' placeholder="Course Name" required>
+				                    		</div>
+				                    	</div>
+				                    	<div class="control-group">
+				                    		<label class="control-label" for="CourseCode">Course Code</label>
+				                    		<div class="controls">
+				                    			<input type="text" id="CourseCode" name='CourseCode' placeholder="Course Code" required>
+				                    		</div>
+				                    	</div>
+				                        <div class="control-group">
+				                    		<label class="control-label" for="inputDescription">Course Objective</label>
+				                    		<div class="controls">
+				                    			<textarea id="inputDescription" name='inputDescription' placeholder="Course Objectives" required></textarea>			                    			
+				                    		</div>
+				                    	</div>
+				                    	<div class="control-group">
+				                    		<label class="control-label" for="inputModules">Number of Modules</label>
+				                    		<div class="controls">
+				                    			<input type="text" id="inputModules" name='inputModules' placeholder="Number of Modules" />
+				                    		</div>
+				                    	</div>
+				                        <div class="form-actions">
+	                        				<button id='btnsubmit' type="submit" class="btn btn-primary">Next</button>
+	                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+	                        			</div>
+                        			</fieldset>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+
+	$(document).ready(function (e) {
+
+		jQuery.validator.setDefaults({
+			errorPlacement: function(error, element){
+				console.log("executing");
+				element.parent().parent().addClass("error");
+				element.siblings("span").remove();
+				element.parent().append('<span class="help-inline">' + error.text() + '</span>');
+			  },
+			success: function(label, element) { //success
+				console.log("success executing");
+				label.parent().parent().addClass("success");
+			},
+			 submitHandler: function(form) {
+					var options = {	
+							type: 'post',
+							dataType: 'json',
+							url: '/course/save',
+							success: function(json) {
+								var course_id = json.course_id;
+								if (json.error) {
+									alert(json.error);
+								}
+								$('#content').html('').load('/course/add2/id/' + course_id);
+							}			
+						};				 
+				    $(form).ajaxSubmit(options);
+			}
+		});
+		
+		var options = {
+				rules: {
+					inputModules: {
+						  required: true,
+						  digits: true
+						},
+				 messages: {
+					    required: "Number of modules is required.",
+					    digits: "The input must be numeric."
+					  }
+				}
+			};
+
+		$("#courseform").validate(options);
+		
+/*		$('#btnsubmit').click(function (e) {
+				alert(result);
+
+				return false;
+
+				var options = {	
+					type: 'post',
+					dataType: 'json',
+					url: '/course/save',
+					success: function(json) {
+						var course_id = json.course_id;
+						if (json.error) {
+							alert(json.error);
+						}
+						$('#content').html('').load('/course/add2/id/' + course_id);
+					}			
+				};
+
+				$("#courseform").ajaxSubmit(options);
+				
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		}); */
+
+	})
+</script>                    

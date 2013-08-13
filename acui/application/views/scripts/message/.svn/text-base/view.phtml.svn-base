@@ -1,0 +1,50 @@
+<table>
+<tr>
+	<td>From:</td>
+	<td>
+		<?php echo $this->message->from;?>		
+	</td>
+</tr>
+<tr>
+	<td>To:</td>
+	<td>
+		<?php echo $this->message->to;?>
+		<input type="hidden" name="to" id="to" value="<?php echo $this->message->to_id?>" />
+	</td>
+</tr>
+<tr>
+	<td>Message:</td>
+	<td><?php echo nl2br(stripslashes($this->message->message));?></td>
+</tr>
+
+<tr>
+	<td>Reply</td>
+	<td>
+		<textarea id="reply"></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2"><button type="button" id="btnsend"><span>Send</span></button></td>
+</tr>
+</table>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {
+		$("#btnsend").click(function (e) {
+             e.preventDefault();
+             var data = { "message" : $("#reply").val(), 'to_user_id' : $("#to").val() };
+
+             var options = {
+                     url: "/message/send",
+                     type: "post",
+                     dataType: "json",
+                     data: data,
+                     success: function (json) {
+                         $("#content").load("/index/home");
+                     }
+             };
+
+             $.ajax(options);
+		});
+	});
+</script>

@@ -1,0 +1,61 @@
+<?php ?>
+<div style="height: 100%; padding-left: 20px;">
+<form method="post" action="/index/sendform">
+<div>Course Name</div>
+<div style="float: left;">
+<?php switch ($this->params['course']) {
+		case "CUDCC": 
+			echo "Credit Union Director's Competency Course (CUDCC) <br/>";
+			break;
+		case "CUCCC":
+			echo "Credit Union CEO's Competency Course (CUCCC) <br/>";
+			break;
+		case "CUASCC":
+			echo "Credit Union Audit/Supervisory Committee's Competency Course (CUASCC) <br/>";
+			break;
+		case "CULOCC":
+			echo "Credit Union Loan Officer's Competency Course (CULOCC) <br/>";
+			break;
+} ?>
+</div>
+
+<div style="clear: both;">Title</div>
+<div><?php echo $this->params['title'];?></div>
+
+<div style="clear: both; float: left;">Name</div>
+<div style="float: left;"><?php echo $this->params['firstname']?></div>
+<div style="float: left;">Surname</div>
+<div style="float: left;"><?php echo $this->params['lastname'];?></div>
+
+<div style="clear: both; float: left;">Gender</div>
+<div style="float: left;"><?php echo $this->params['gender']?></div>
+
+<div style="clear: both; float: left;">Mailling Address</div>
+<div style="float: left;"><?php echo $this->params['mailingaddress']; ?></div>
+
+<div style="clear: both">Home Phone</div>
+<div><?php echo $this->params['homephone'];?></div>
+
+<div>Work Phone</div>
+<div><?php echo $this->params['workphone'];?></div>
+
+<div>Mobile Phone</div>
+<div><?php echo $this->params['mobilephone'];?></div>
+
+<div>Skype</div>
+<div><?php echo $this->params['skype'];?></div>
+
+<div>Facebook</div>
+<div><?php echo $this->params['facebook'];?></div>
+
+<div>Position in Credit Union</div>
+<div><?php echo $this->params['position'];?></div>
+
+<div>Name &amp; Address of Credit Union</div>
+<div><?php echo $this->params['cuaddress'];?></div>
+
+<div>Name of Federation Affiliated</div>
+<div><?php echo $this->params['federation'];?></div>
+
+</form>
+</div>

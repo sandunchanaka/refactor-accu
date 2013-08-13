@@ -1,0 +1,58 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+
+ <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Course Name</th>
+                                <th>Course Code</th>
+                                <th>Course Description</th>
+                                <th>Number of Modules</th>
+                                <?php if ($this->delete) { ?>
+                                	<th>Del</th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <?php foreach ($this->courses as $course) { ?>
+								<tr id="course_row_<?php echo $course->id; ?>" class="<?php echo $this->cycle(array('', 'info'))->next(); ?>">
+									<td><?php echo $course->id;?></td>
+									<td><a class="course" href="#" data-course_id="<?php echo $course->id;?>"><?php echo stripslashes($course->name);?></a></td>
+									<td><?php echo $course->code; ?></td>
+									<td><?php echo nl2br($course->description);?></td>
+									<td><?php echo $course->modules;?></td>
+									<?php if ($this->delete) { ?>
+										<td><button type="button" data-course-id="<?php echo $course->id; ?>" class="delete"><span>Delete</span></button>
+									<?php } ?>
+								</tr>
+							<?php } ?>
+                        </tbody>
+                    </table>
+                    
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$.ajaxSetup({ cache: false });
+		
+		$(".delete").click(function (e) {
+			e.preventDefault();
+			var data = "course_id=" + $(this).attr('data-course-id');
+			var options = {
+						data: data,
+						url: "/course/delete/",
+						type: "post",
+						dataType: "json",
+						success: function (json) {
+							$("#course_row_" + json.course_id).remove();
+						}
+					};
+			$.ajax(options);
+		});
+		$(".course").click(function (e) {
+			e.preventDefault();
+			//History.pushState(null, "List Courses", "/course/view/id/" + $(this).attr('data-course_id'));
+			$("#content").html('').load("/course/view/id/" + $(this).attr('data-course_id'));
+			return false;
+		});
+	});
+ </script>                    

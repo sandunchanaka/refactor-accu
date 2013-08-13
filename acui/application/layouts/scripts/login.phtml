@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ACUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta property="og:title" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+
+	<!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <style>
+	
+    </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link href="/css/main-final.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="/assets/ico/favicon.png">
+
+                                   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/doubletaptogo.js"></script>
+    
+    <script>
+
+    </script>
+</head>
+
+<body>
+
+<div class="wrapper">
+	<div class="container">
+    	<div class="row header" style="position:fixed;">
+        	<div class="span8"><img src="/images/logo.png" alt=""></div>
+            <div class="span4">
+            	<div class="btn-toolbar">
+              		
+              	</div>
+            </div>
+            
+            <hr>
+       	</div>
+    </div>
+    
+    
+    <div class="container">
+    	<div class="row">
+    	
+    		<?php echo $this->sideMenu(); ?>
+    	
+            <div id='content' class="span9" style="padding-left:25%; padding-top:140px;">
+            	<?php echo $this->layout()->content ?>	
+            </div>        
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>

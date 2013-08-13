@@ -1,0 +1,49 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='evalform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'saveeval'), 'default', false); ?>'>
+			                    		<div class="control-group">
+				                    		<label class="control-label" for="inputName">Course Name</label>
+				                    		<div class="controls">
+				                    			<?php echo $this->course_name; ?>
+				                    		</div>
+				                    	</div>
+				                    	<div class="control-group">
+				                    		<label class="control-label" for="inputName">Student Name</label>
+				                    		<div class="controls">
+				                    			<?php echo $this->student_name; ?>
+				                    		</div>
+				                    	</div>
+			                    	<?php foreach ($this->ces as $evaluation_item) { ?>			                    	
+				                    	<div class="control-group">
+				                    		<label class="control-label" for="inputName"><?php echo $evaluation_item->criteria; ?></label>
+				                    		<div class="controls">
+				                    			<?php if ($evaluation_item->type == 1) { ?>
+				                    				<?php echo $evaluation_item->value_int; ?>
+				                    			<?php } else { ?>
+				                    				<?php echo nl2br($evaluation_item->value_text); ?>
+				                    			<?php } ?>
+				                    		</div>
+				                    	</div>
+			                        <?php } ?>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#btnsubmit').click(function (e) {
+			$('#evalform').ajaxSubmit({ 
+					success: function (json) {
+						$('#content').html('').load('/course/evaldone');
+					}
+				});
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

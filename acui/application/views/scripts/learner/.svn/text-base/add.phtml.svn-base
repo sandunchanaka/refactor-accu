@@ -1,0 +1,96 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'facilitator', 'action' => 'save'), 'default', false); ?>'>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="inputName">Learner Name</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="inputName" name='inputName' placeholder="Learner Name" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="inputName">Learner Id</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="secondary_id" name='secondary_id' placeholder="Learner Id" />
+			                    		</div>
+			                    	</div>
+			                        <div class="control-group">
+			                    		<label class="control-label" for="inputEmail">Learner Email</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="inputEmail" name='inputEmail' placeholder="Learner Email" />			                    			
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="inputPassword">Learner Password</label>
+			                    		<div class="controls">
+			                    			<input type="password" id="inputPassword" name='inputPassword' placeholder="Learner Password" />
+			                    		</div>
+			                    	</div>
+			                    	
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="country">Country</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="country" name='country' placeholder="Country" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="organization">Organization</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="organization" name='organization' placeholder="Organization" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="phone">Phone</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="phone" name='phone' placeholder="Phone" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="phone2">Mobile</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="phone2" name='phone2' placeholder="Mobile" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="skype">Skype</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="skype" name='skype' placeholder="Skype" />
+			                    		</div>
+			                    	</div>
+			                    	<div class="control-group">
+			                    		<label class="control-label" for="facebook">Facebook</label>
+			                    		<div class="controls">
+			                    			<input type="text" id="facebook" name='facebook' placeholder="Facebook" />
+			                    		</div>
+			                    	</div>
+			                    	
+			                        <div class="form-actions">
+                        				<button id='btnsubmit' type="button" class="btn btn-primary">Next</button>
+                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+                        			</div>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#btnsubmit').click(function (e) {
+				var options = {
+					type: 'post',
+					dataType: 'json',
+					url: '/learner/save',
+					success: function(json) {
+						var learner_id = json.learner_id;
+						$('#content').html('').load('/learner/view/id/' + learner_id);
+					}
+				};
+				$("#loginform").ajaxSubmit(options);
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

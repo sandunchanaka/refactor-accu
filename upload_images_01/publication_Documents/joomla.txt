@@ -1,0 +1,37 @@
+Admin Side
+
+
+
+- coupon management system from where admin can add new coupons and
+
+change the coupon prices and delete that.
+
+- general configuration section from where admin can configure the
+
+admin email account to which the contact us form details will go.
+
+- show list of registered members and edit and delete members.
+
+- upload photos in gallery
+
+
+
+Visitor Side
+
+
+
+- Customer Registration By email verification system
+
+- Login Section
+
+- Forgot password
+
+- Edit the registration details after login
+
+- Lgout
+
+- Contact Us form submit and email go to admin
+
+- Appointment for and email go to admin.
+
+- In gallery show uploaded photos

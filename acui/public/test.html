@@ -1,0 +1,30 @@
+<html>
+
+<script type='text/javascript'>
+
+function longestWord(string) {
+    var str = string.split(" ");
+    var longest = 0;
+    var word = null;
+    for (var i = 0; i < str.length; i++) {
+        var checkedLetters = "";
+        for (var j = 0; j < str[i].length; j++) {
+            if (str[i][j] == /[a-zA-Z]/) {
+                checkedLetters += str[i][j];
+            }
+        if (longest < checkedLetters.length) {
+            longest = checkedLetters.length;
+            word = checkedLetters;
+           }
+        }
+    }
+    return word;
+}
+
+test = longestWord("Hello World");
+alert(test);
+
+</script>
+
+
+</html>

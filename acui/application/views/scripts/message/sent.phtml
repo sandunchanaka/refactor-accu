@@ -1,0 +1,35 @@
+ <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>To</th>
+                                <th>From</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <?php foreach ($this->messages as $message) { ?>
+								<tr id='message_<?php echo $message->id; ?>' class="<?php echo $this->cycle(array('', 'info'))->next(); ?>">
+									<td><?php echo $message->id;?></td>
+									<td><a class="message" href="#" data-message-id="<?php echo $message->id;?>"><?php echo $message->rcpt_name;?></a></td>
+									<td><?php echo $message->sender_name;?></td>
+									<td><?php echo substr($message->message, 0, 200);?></td>
+									<td><?php echo $message->created_date;?></td>
+									<td>
+										<button><span>Delete</span></button>										
+									</td>
+								</tr>
+							<?php } ?>
+                        </tbody>
+                    </table>
+                    
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$("a.message").click(function (e) {
+			e.preventDefault();
+			$("#content").html('').load("/message/view/id/" + $(this).attr('data-message-id'));			
+		});		
+	});
+ </script>                    

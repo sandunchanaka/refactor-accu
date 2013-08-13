@@ -1,0 +1,25 @@
+<?php echo $this->breadCrumb(); ?>
+                    
+			
+<h2>Eval Item Added</h2>                                
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#btnsubmit').click(function (e) {
+			$('#frmeval').ajaxSubmit(
+					{
+						success: function (json) {
+							$('#content').html('').load('/course/evalitemadded');							
+						}
+					});
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

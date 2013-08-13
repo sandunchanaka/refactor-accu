@@ -1,0 +1,30 @@
+<?php
+?>
+<h2>Edit Your Message</h2>
+<div>
+	<form method="post" action="/discussion/editmessage">
+    	Message<textarea id="message" rows="10" style="width: 550px;"><?php echo stripcslashes($this->message); ?></textarea> <br/>
+        <input type="hidden" name="message_id" id="message_id" value="<?php echo $this->message_id; ?>" />
+        <button type="button" id="addmessage"><span>Edit Message</span></button>
+	</form>
+</div>
+                    
+ <script type="text/javascript">
+	$(document).ready(function (e) {
+         
+		$("#addmessage").click(function (e) {
+			e.preventDefault();
+			var data = { "message" : $('#message').val(), "message_id" : $("#message_id").val() };
+			var options = {
+				url: "/discussion/editmessage",
+				type: "post",
+				dataType: "json",
+				data: data,
+				success: function (json) {
+					$('#content').load("/discussion/threadview/id/" + json.thread_id);					
+				}
+			};
+			$.ajax(options);
+		});
+	});
+ </script>

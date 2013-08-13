@@ -1,0 +1,24 @@
+<div class="span3" style="position:fixed; padding-top:140px;">
+            
+            	<div class="accordion" id="leftMenu">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle active" data-toggle="collapse" data-parent="#leftMenu" href="#">
+                                  ACUI Login
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$('#aprofile').click(function (e) {
+			$('#content').html('').load('/profile/index');
+		})
+		$('#aprogress').click(function (e) {
+			$('#content').html('').load('/course/progress');
+		});
+	});
+</script>            

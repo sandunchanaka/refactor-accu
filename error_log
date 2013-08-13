@@ -1,0 +1,2 @@
+[10-Aug-2013 04:34:28 UTC] PHP Warning:  require_once(/home/aaccu/libs/adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/aaccu/public_html/includes/config.php on line 31
+[10-Aug-2013 04:34:28 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/aaccu/libs/adodb/adodb.inc.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/aaccu/public_html/includes/config.php on line 31

@@ -1,0 +1,74 @@
+<table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Message</th>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<?php foreach ($this->messages as $message) { ?>
+                            <tr class='<?php echo $this->cycle(array('', 'info'))->next();?>'>
+                                <td><?php echo nl2br(stripcslashes($message->message));?></td>
+                                <td><?php echo $message->name;?></td>
+                                <td><?php echo $message->created_date;?></td>
+                                <td>
+                                <?php if ($this->delete || $message->user_id == $this->user_id) { ?>                                	
+                                		<button type='button' class='delete' data-id='<?php echo $message->id;?>'><span>Delete</span></button>
+                                		<button type='button' class='edit' data-id='<?php echo $message->id;?>'><span>Edit</span></button>
+                                <?php } ?>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    
+                    <div>
+                    	<form method="post" action="/discussion/addmessage">
+                    		Message<textarea id="message" rows="10" style="width: 550px;"></textarea> <br/>
+                    		<input type="hidden" name="thread_id" id="thread_id" value="<?php echo $this->thread_id; ?>" />
+                    		<button type="button" id="addmessage"><span>Post Message</span></button>
+                    	</form>
+                    </div>
+                    
+ <script type="text/javascript">
+	$(document).ready(function (e) {
+
+		$("button.edit").click(function (e) {
+			e.preventDefault();
+			$("#content").load("/discussion/edit/id/" + $(this).attr('data-id'));
+		});
+
+		$("button.delete").click(function (e) {
+			e.preventDefault();
+			var that = $(this);
+			var data = { "id" : $(this).attr('data-id') };
+			var options = {
+				url : "/discussion/delmsg",
+				data : data,
+				type: "post",
+				dataType : "json",
+				success: function (json) {
+					that.parent().parent().remove();
+				}
+			};
+			$.ajax(options);
+		});
+        
+		$("#addmessage").click(function (e) {
+			e.preventDefault();
+			var data = { "message" : $('#message').val(), "thread_id" : $("#thread_id").val() };
+			var options = {
+				url: "/discussion/addmessage",
+				type: "post",
+				dataType: "json",
+				data: data,
+				success: function (e) {
+					$('#content').load("/discussion/threadview/id/" + $("#thread_id").val());					
+				}
+			};
+			$.ajax(options);
+		});
+	});
+ </script>

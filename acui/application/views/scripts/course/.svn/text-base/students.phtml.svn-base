@@ -1,0 +1,35 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+
+ <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Student Name</th>
+                                <th>Course Name</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <?php foreach ($this->students as $student) { ?>
+								<tr id="student_row_<?php echo $student->id; ?>" class="<?php echo $this->cycle(array('', 'info'))->next(); ?>">
+									<td><?php echo $student->id;?></td>
+									<td><a class="student" href="#" data-student-id="<?php echo $student->id;?>"><?php echo stripslashes($student->student_name);?></a></td>
+									<td><?php echo $student->course_name; ?></td>									
+								</tr>
+							<?php } ?>
+                        </tbody>
+                    </table>
+                    
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+		$(".student").click(function (e) {
+			e.preventDefault();			
+			$("#content").load("/learner/view/id/" + $(this).attr('data-student-id') + "/");
+		});
+		$(".course").click(function (e) {
+			e.preventDefault();
+			History.pushState(null, "List Courses", "/course/view/id/" + $(this).attr('data-course_id'));
+			//$("#content").html('').load("/course/view/id/" + $(this).attr('data-course_id'));
+			return false;
+		});
+	});
+ </script>                    

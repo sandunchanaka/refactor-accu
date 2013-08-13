@@ -1,0 +1,95 @@
+<?php echo $this->breadCrumb($this->breadcrumb); ?>
+                    
+			
+                                <form id='loginform' class="form-horizontal" method='post' action='<?php echo $this->url(array('controller' => 'course', 'action' => 'save'), 'default', false); ?>'>
+			                    	
+			                    	<div class="tabbable"> <!-- Only required for left/right tabs -->
+                        				<ul class="nav nav-tabs">
+                            				<li class="active"><a href="#tab1" data-toggle="tab">Course Overview</a></li>
+                            				<li><a href="#tab2" data-toggle="tab">Facilitator</a></li>
+                            				<li><a href="#tab3" data-toggle="tab">Students</a></li>
+                            				<li><a href="#tab4" data-toggle="tab">Modules</a></li>
+                        				</ul>
+				                        <div class="tab-content">
+				                            <div class="tab-pane active" id="tab1">
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputName">Course Name</label>
+			                    					<div class="controls">
+			                    						<?php echo stripslashes($this->course->name); ?>
+			                    					</div>
+			                    				</div>				                            
+				                                <div class="control-group">
+			                    					<label class="control-label" for="inputName">Course Overview</label>
+			                    					<div class="controls">
+			                    						<?php echo nl2br(stripcslashes($this->course->description)); ?>
+			                    					</div>
+			                    				</div>
+				                            </div>
+				                            <div class="tab-pane" id="tab2">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">Facilitator Name</label>
+			                    					<div class="controls">
+			                    						<?php echo $this->facilitator->name; ?>
+			                    					</div>
+			                    				</div>				                            	
+				                            </div>
+				                            
+				                            <div class="tab-pane" id="tab3">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">Students</label>
+			                    					<div class="controls">
+														<?php foreach ($this->students as $student) { ?>
+															<?php echo $student->name;?><br/>
+														<?php } ?>			                    										                    			
+			                    					</div>
+			                    				</div>
+				                            </div>
+				                            
+				                            <div class="tab-pane" id="tab4">
+				                            
+				                            	<div class="control-group">
+			                    					<label class="control-label" for="inputDescription">Modules</label>
+			                    					<div class="controls">
+														<?php foreach ($this->modules as $module) { ?>
+															<a class="module" href="#" data-module-id="<?php echo $module->id;?>"><?php echo $module->module_name;?></a><br/>
+														<?php } ?>			                    										                    			
+			                    					</div>
+			                    				</div>
+				                            </div>
+				                            
+				                        </div>
+                    				</div>
+                    				<?php if ($this->edit) { ?>
+			                        <div class="form-actions">
+                        				<button id='btnedit' type="submit" data-course-id="<?php echo $this->course->id;?>" class="btn btn-primary">Edit</button>
+                        				<button id='btncancel' type="button" class="btn">Cancel</button>                        
+                        			</div>
+                        			<?php } ?>
+                    			</form>
+                 
+                 
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$("#btnedit").click(function (e) {
+			$('#content').html('').load("/course/edit/id/" + $(this).attr('data-course-id'));
+			return false;
+		});
+
+		$(".module").click(function (e) {
+			$("#content").html('').load("/course/moduleview/id/" + $(this).attr('data-module-id'));
+		});
+		
+		$('#btnsubmit').click(function (e) {
+			
+			return false;
+		});
+
+		$('#btncancel').click(function (e) {
+
+		});
+
+	})
+</script>                    

@@ -1,0 +1,39 @@
+<?php echo $this->breadCrumb(); ?>
+                    
+<table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Module Name</th>
+                                <th>Exercises</th>
+                                <th>Assignment</th>
+                                <th>Completed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<?php foreach ($this->modules as $module) { ?>
+                            <tr class="<?php echo $this->cycle(array('info', ''))->next();?>">
+                                <td><?php echo $module; ?></td>
+                                <td><input type='radio' /></td>
+                                <td><input type='radio' /></td>
+                                <td><input type='radio' /></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+
+                   
+<script type='text/javascript'>
+	$(document).ready(function (e) {
+
+		$('#btnsubmit').click(function (e) {
+			$('#loginform').submit();
+		});
+
+		$('#btncancel').click(function (e) {
+			$('#inputEmail').val('');
+			$('#inputPassword').val('');
+
+		});
+
+	})
+</script>                    

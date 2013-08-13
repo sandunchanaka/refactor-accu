@@ -1,0 +1,22 @@
+#shoutbox {
+	width:30%;
+	border: 1px solid #555;
+	padding: 3px;
+	top: 80px;
+	background: #fff;
+}
+
+#sb_warning {
+	font-size: small;
+	color: #ffa500;
+}
+
+#sb_chatLog {
+	overflow: auto;
+	height: 150px;
+}
+
+#shoutbox input {
+	border: 1px solid #eee;
+	color: #ffa300;
+}
