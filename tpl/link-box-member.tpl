@@ -7,7 +7,7 @@
         <?php } ?>
          <?php 
             $m = 0;
-            $members_types = Member :: GetMemberTypes();
+            @$members_types = Member :: GetMemberTypes();
             for($m;$m<count($members_types);$m++){
                 $member_row = each($members_types);	
                  $pageid = 	40+$m +2;
