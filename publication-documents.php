@@ -75,7 +75,7 @@ include("tpl/header2.tpl");?>
 		           <?php 
 				//if (isset($_REQUEST['pub_cat_id'])){
 				$i=0;
-				$pubs = Publication::GetPublicationDocuments($_REQUEST['pub_cat_id']);
+				@$pubs = Publication::GetPublicationDocuments($_REQUEST['pub_cat_id']);
 				for($a=0;$a<count($pubs);$a++){
 				$row = each($pubs);	
 				$i=1;
@@ -86,7 +86,7 @@ include("tpl/header2.tpl");?>
 		            <tbody>
 		              
                       <?php
-									    $result=Publication::GetPublicationFiles($row["value"]["publication_id"],$row["value"]["record_type"]);
+									    @$result=Publication::GetPublicationFiles($row["value"]["publication_id"],$row["value"]["record_type"]);
 										for($x=0;$x<count($result);$x++)
 										{
 											$row1=each($result);
