@@ -84,7 +84,7 @@ include("tpl/header2.tpl");?>
 
        <?php  if($_REQUEST['mem_type_id'] == 4){
 	   			
-				$result_affmem_con=Member::Getmember_country(4);
+				@$result_affmem_con=Member::Getmember_country(4);
 					for($x=0;$x<count($result_affmem_con);$x++)
 					{
 						$row_affmem_con=each($result_affmem_con);
@@ -99,7 +99,7 @@ include("tpl/header2.tpl");?>
                     <?php
 						
 						$i=0;
-						$result_affmem=Member::Getmember_new(4,$row_affmem_con['value']['country_id']);
+						@$result_affmem=Member::Getmember_new(4,$row_affmem_con['value']['country_id']);
 						
 						for($a=0;$a<count($result_affmem);$a++)
 						{
@@ -153,7 +153,7 @@ include("tpl/header2.tpl");?>
          <?php }}
 		 		else {
 					$i=0;
-					$member = Member::Getmember($_REQUEST['mem_type_id']);
+					@$member = Member::Getmember($_REQUEST['mem_type_id']);
 					foreach ($member as $row) {	
 					
 					
