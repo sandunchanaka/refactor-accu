@@ -25,7 +25,7 @@
         <ul class="level-two">
         <?php 
             $pt =0;
-            $p_types = Member :: GetAllPublicationTypes();
+            @$p_types = Member :: GetAllPublicationTypes();
             for($pt=0;$pt<count($p_types);$pt++){
                 $pub_type1 = each($p_types);	
         ?>
@@ -38,7 +38,7 @@
         <ul class="level-two">
         <?php 
             $m = 0;
-            $members_types = Member :: GetMemberTypes();
+            @$members_types = Member :: GetMemberTypes();
             for($m;$m<count($members_types);$m++){
                 $member_row = each($members_types);	
         ?>
@@ -50,7 +50,7 @@
         <ul class="level-two">
         <?php 
 		  $c = 0;
-		  $cu_solution =  CU_Solutions::GetSolutions();
+		  @$cu_solution =  CU_Solutions::GetSolutions();
 		  for($c;$c<count($cu_solution);$c++){
 		  $cu_solution_row = each($cu_solution);			
 		?>
