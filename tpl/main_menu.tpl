@@ -64,7 +64,7 @@
         <li class=" "><a href="#" class="second-level">Video Gallery</a></li>
         </ul>
 	</li>
-<li class="first"><a href="http://www.aaccu.asia/accu-forum/" class=""><span class="toi">FORUM</span></a>
+<li class="first"><a href="http://www.aaccu.coop/accu-forum/" class=""><span class="toi">FORUM</span></a>
 	</li>
 
 </ul><!-- .primary-navigation -->
